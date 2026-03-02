@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output files
+output/
+*.tmp
+
+# Generated pipeline output files
+*_Financial_Model.xlsx
+*_Business_Plan.docx
+*_Business_Plan.md
+*_Model_Outputs.json
+*_model_gen.py
+~$*
+
+# Environment variables
+.env
+.env.local

@@ -1,0 +1,117 @@
+{
+  "category": "electronics_gadgets",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "IRP Commerce Ecommerce Market Data",
+    "overall_rate": 0.0073,
+    "adjustment_factor": 0.24,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.006,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Electrical & Commercial Equipment: 0.73% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 0.24 = 0.006",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "High competition from Amazon; price comparison reduces DTC conversion"
+    },
+    "conv_organic": {
+      "value": 0.007,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Electrical & Commercial Equipment: 0.73% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 0.24 = 0.007",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Brand-loyal customers and direct searches convert better"
+    },
+    "conv_retention": {
+      "value": 0.018,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Electrical & Commercial Equipment: 0.73% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 0.24 = 0.018",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Accessories and consumables drive repeat; core products less frequent"
+    },
+    "cac_paid": {
+      "value": 75.0,
+      "unit": "usd",
+      "confidence": 0.70,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Electronics CAC typically $60-90"
+      },
+      "notes": "Competitive category; Google Shopping and Amazon dominate"
+    },
+    "aov_typical": {
+      "value": 145.0,
+      "unit": "usd",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Consumer goods: $211 AOV; DTC electronics/gadgets typically $120-170"
+      },
+      "notes": "Gadgets $50-100, premium electronics $200+"
+    },
+    "gross_margin_typical": {
+      "value": 0.35,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Electronics DTC typically 30-40% gross margin"
+      },
+      "notes": "Commoditized category; price transparency limits margin"
+    }
+  }
+}

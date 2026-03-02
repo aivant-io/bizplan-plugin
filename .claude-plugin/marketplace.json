@@ -1,0 +1,17 @@
+{
+  "name": "bizplan-plugins",
+  "description": "AI-powered business plan and financial model generators for pre-launch founders. Generate professional Excel financial models and narrative business plans with industry benchmarks.",
+  "metadata": {
+    "description": "AI-powered business plan and financial model generators for pre-launch founders. Generate professional Excel financial models and narrative business plans with industry benchmarks."
+  },
+  "owner": {
+    "name": "Aivant"
+  },
+  "plugins": [
+    {
+      "name": "bizplan-ecommerce",
+      "source": "./bizplan-ecommerce",
+      "description": "Generate professional ecommerce business plans and 6-year financial models with industry benchmarks, curated category data, and automated equity optimization"
+    }
+  ]
+}

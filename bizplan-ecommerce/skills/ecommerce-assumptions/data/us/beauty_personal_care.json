@@ -1,0 +1,117 @@
+{
+  "category": "beauty_personal_care",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "Dynamic Yield XP2 Benchmarks",
+    "overall_rate": 0.0574,
+    "adjustment_factor": 1.91,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.048,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Beauty & Personal Care: 5.74% overall conversion rate (200M+ users, 300M+ sessions)"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 1.91 = 0.048",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Derived: industry overall 5.74% (DY) adjusted for paid traffic which typically converts at 0.83× overall"
+    },
+    "conv_organic": {
+      "value": 0.057,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Beauty & Personal Care: 5.74% overall conversion rate (200M+ users, 300M+ sessions)"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 1.91 = 0.057",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Derived: organic/direct traffic typically converts at 1.0× overall rate"
+    },
+    "conv_retention": {
+      "value": 0.143,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Beauty & Personal Care: 5.74% overall conversion rate (200M+ users, 300M+ sessions)"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 1.91 = 0.143",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Derived: email/SMS traffic converts at 2.5× overall; high repeat purchase category"
+    },
+    "cac_paid": {
+      "value": 45.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Beauty and cosmetics brands see average CAC of $40-50"
+      },
+      "notes": "Varies significantly by sub-category (skincare higher, makeup lower)"
+    },
+    "aov_typical": {
+      "value": 75.0,
+      "unit": "usd",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Beauty and personal care: $71 AOV (September 2024)"
+      },
+      "notes": "DTC skincare tends higher ($80-100), cosmetics lower ($50-70)"
+    },
+    "gross_margin_typical": {
+      "value": 0.55,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Beauty/cosmetics DTC brands typically achieve 50-60% gross margins"
+      },
+      "notes": "High margins due to perceived value, low COGS for formulations"
+    }
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "default_sheet": "Assumptions",
+  "inputs": [
+    // ========================================================================
+    // TRAFFIC (B5-B11)
+    // ========================================================================
+    {
+      "input_id": "traffic_total_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B5",
+      "label_text": "Total annual site visits – Year 1",
+      "type": "int",
+      "min_value": 0
+    },
+    {
+      "input_id": "traffic_yoy_growth",
+      "sheet_name": "Assumptions",
+      "cell_address": "B6",
+      "label_text": "Annual traffic growth (YoY %)",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 2.0
+    },
+    {
+      "input_id": "traffic_mix_paid_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B9",
+      "label_text": "% of visits – paid acquisition",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 1.0
+    },
+    {
+      "input_id": "traffic_mix_organic_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B10",
+      "label_text": "% of visits – organic & direct",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 1.0
+    },
+    {
+      "input_id": "traffic_mix_retention_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B11",
+      "label_text": "% of visits – retention (email & SMS)",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 1.0
+    },
+
+    // ========================================================================
+    // CONVERSION (B15-B17)
+    // ========================================================================
+    {
+      "input_id": "conv_paid",
+      "sheet_name": "Assumptions",
+      "cell_address": "B15",
+      "label_text": "Conversion rate – paid acquisition",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.15
+    },
+    {
+      "input_id": "conv_organic",
+      "sheet_name": "Assumptions",
+      "cell_address": "B16",
+      "label_text": "Conversion rate – organic & direct",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.15
+    },
+    {
+      "input_id": "conv_retention",
+      "sheet_name": "Assumptions",
+      "cell_address": "B17",
+      "label_text": "Conversion rate – retention (email & SMS)",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.25
+    },
+
+    // ========================================================================
+    // REPEAT PURCHASE (B20-B22) — V2 NEW
+    // ========================================================================
+    {
+      "input_id": "repeat_purchase_rate_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B20",
+      "label_text": "Repeat purchase rate – Year 1",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.60
+    },
+    {
+      "input_id": "repeat_purchase_frequency",
+      "sheet_name": "Assumptions",
+      "cell_address": "B21",
+      "label_text": "Repeat purchase frequency (orders/year)",
+      "type": "float",
+      "min_value": 1.5,
+      "max_value": 6.0
+    },
+    {
+      "input_id": "retention_improvement_annual",
+      "sheet_name": "Assumptions",
+      "cell_address": "B22",
+      "label_text": "Annual retention improvement %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.15
+    },
+
+    // ========================================================================
+    // ORDER ECONOMICS (B25-B32)
+    // ========================================================================
+    {
+      "input_id": "aov_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B25",
+      "label_text": "Average order value (gross) – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "aov_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B26",
+      "label_text": "AOV inflation %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.10
+    },
+    {
+      "input_id": "cogs_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B27",
+      "label_text": "Cost of goods sold %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 1.0
+    },
+    {
+      "input_id": "cogs_annual_improvement_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B28",
+      "label_text": "Annual COGS improvement %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.05
+    },
+    {
+      "input_id": "discounts_promos_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B29",
+      "label_text": "Discounts & promotions %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.40
+    },
+    {
+      "input_id": "return_rate_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B30",
+      "label_text": "Return/refund rate %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.50
+    },
+    {
+      "input_id": "payment_processing_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B31",
+      "label_text": "Payment processing fee %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.05
+    },
+    {
+      "input_id": "platform_fee_pct",
+      "sheet_name": "Assumptions",
+      "cell_address": "B32",
+      "label_text": "Marketplace/platform fee %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.20
+    },
+
+    // ========================================================================
+    // MARKETING VARIABLE (B35-B36)
+    // ========================================================================
+    {
+      "input_id": "cpc_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B35",
+      "label_text": "Paid acquisition cost per click (CPC) – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "cpc_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B36",
+      "label_text": "CPC inflation %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.20
+    },
+
+    // ========================================================================
+    // FULFILMENT VARIABLE (B39-B43)
+    // ========================================================================
+    {
+      "input_id": "ship_cost_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B39",
+      "label_text": "Shipping cost per order – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "ship_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B40",
+      "label_text": "Shipping cost inflation %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.15
+    },
+    {
+      "input_id": "handling_cost_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B41",
+      "label_text": "Handling cost per order – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "packaging_cost_per_order",
+      "sheet_name": "Assumptions",
+      "cell_address": "B42",
+      "label_text": "Packaging / branded experience cost per order",
+      "type": "currency",
+      "min_value": 0.0,
+      "max_value": 10.0
+    },
+    {
+      "input_id": "support_cost_per_order",
+      "sheet_name": "Assumptions",
+      "cell_address": "B43",
+      "label_text": "Customer support cost per order",
+      "type": "currency",
+      "min_value": 0.0,
+      "max_value": 10.0
+    },
+
+    // ========================================================================
+    // WAREHOUSE RENT (B46-B48)
+    // ========================================================================
+    {
+      "input_id": "warehouse_rent_amount_when_active",
+      "sheet_name": "Assumptions",
+      "cell_address": "B46",
+      "label_text": "Warehouse rent amount (when active)",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "warehouse_rent_start_year",
+      "sheet_name": "Assumptions",
+      "cell_address": "B47",
+      "label_text": "Warehouse rent – start year",
+      "type": "year"
+    },
+    {
+      "input_id": "warehouse_rent_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B48",
+      "label_text": "Warehouse rent – annual inflation (%)",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.1
+    },
+
+    // ========================================================================
+    // OFFICE & G&A (B51-B59)
+    // ========================================================================
+    {
+      "input_id": "office_rent_amount_when_active",
+      "sheet_name": "Assumptions",
+      "cell_address": "B51",
+      "label_text": "Office rent amount (when active)",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "office_rent_start_year",
+      "sheet_name": "Assumptions",
+      "cell_address": "B52",
+      "label_text": "Office rent – start year",
+      "type": "year"
+    },
+    {
+      "input_id": "office_rent_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B53",
+      "label_text": "Office rent – annual inflation %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.1
+    },
+    {
+      "input_id": "salaries_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B54",
+      "label_text": "Salaries, wages & benefits – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "months_to_full_team",
+      "sheet_name": "Assumptions",
+      "cell_address": "B55",
+      "label_text": "Months to full team headcount",
+      "type": "int",
+      "min_value": 0,
+      "max_value": 24
+    },
+    {
+      "input_id": "prof_fees_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B56",
+      "label_text": "Professional fees – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "sal_prof_inflation",
+      "sheet_name": "Assumptions",
+      "cell_address": "B57",
+      "label_text": "Salaries & professional fees inflation %",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.15
+    },
+    {
+      "input_id": "misc_ga_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B58",
+      "label_text": "Miscellaneous – Year 1",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "monthly_saas_costs",
+      "sheet_name": "Assumptions",
+      "cell_address": "B59",
+      "label_text": "Monthly SaaS / technology costs",
+      "type": "currency",
+      "min_value": 0.0,
+      "max_value": 5000.0
+    },
+
+    // ========================================================================
+    // WORKING CAPITAL (B62-B65)
+    // ========================================================================
+    {
+      "input_id": "ar_days",
+      "sheet_name": "Assumptions",
+      "cell_address": "B62",
+      "label_text": "Accounts receivable days",
+      "type": "float",
+      "min_value": 0.0,
+      "max_value": 120.0
+    },
+    {
+      "input_id": "inventory_days_year1",
+      "sheet_name": "Assumptions",
+      "cell_address": "B63",
+      "label_text": "Inventory days – Year 1",
+      "type": "float",
+      "min_value": 0.0,
+      "max_value": 180.0
+    },
+    {
+      "input_id": "inventory_turns_improvement",
+      "sheet_name": "Assumptions",
+      "cell_address": "B64",
+      "label_text": "Inventory turns improvement %",
+      "type": "float_pct",
+      "min_value": -0.5,
+      "max_value": 0.5
+    },
+    {
+      "input_id": "ap_days",
+      "sheet_name": "Assumptions",
+      "cell_address": "B65",
+      "label_text": "Accounts payable days",
+      "type": "float",
+      "min_value": 0.0,
+      "max_value": 90.0
+    },
+
+    // ========================================================================
+    // CAPEX & DEPRECIATION (B68-B69)
+    // ========================================================================
+    {
+      "input_id": "capex_pct_of_net_rev",
+      "sheet_name": "Assumptions",
+      "cell_address": "B68",
+      "label_text": "Capex as % of net revenue",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.25
+    },
+    {
+      "input_id": "dep_period_years",
+      "sheet_name": "Assumptions",
+      "cell_address": "B69",
+      "label_text": "Depreciation period (straight-line, years)",
+      "type": "int",
+      "min_value": 1,
+      "max_value": 7
+    },
+
+    // ========================================================================
+    // FINANCING (B72-B76)
+    // Note: B73 = "Loan start year" constant (2026), not mapped — hardcoded in template
+    // ========================================================================
+    {
+      "input_id": "initial_loan_amount",
+      "sheet_name": "Assumptions",
+      "cell_address": "B72",
+      "label_text": "Initial loan amount",
+      "type": "currency",
+      "min_value": 0.0
+    },
+    {
+      "input_id": "interest_rate",
+      "sheet_name": "Assumptions",
+      "cell_address": "B74",
+      "label_text": "Interest rate",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.25
+    },
+    {
+      "input_id": "loan_term_years",
+      "sheet_name": "Assumptions",
+      "cell_address": "B75",
+      "label_text": "Loan term (years)",
+      "type": "int",
+      "min_value": 1,
+      "max_value": 10
+    },
+    {
+      "input_id": "initial_equity_injection",
+      "sheet_name": "Assumptions",
+      "cell_address": "B76",
+      "label_text": "Initial equity injection",
+      "type": "currency",
+      "min_value": 0.0
+    },
+
+    // ========================================================================
+    // TAX (B79)
+    // ========================================================================
+    {
+      "input_id": "tax_rate",
+      "sheet_name": "Assumptions",
+      "cell_address": "B79",
+      "label_text": "Tax rate",
+      "type": "float_pct",
+      "min_value": 0.0,
+      "max_value": 0.5
+    }
+  ]
+}

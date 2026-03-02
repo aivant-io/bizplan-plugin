@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "description": "Global benchmark defaults and inflation rates for ecommerce financial modeling",
+    "last_updated": "2025-12-22",
+    "version": "1.0.0"
+  },
+  "inflation": {
+    "cpc_inflation": {
+      "value": 0.06,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.wordstream.com/blog/ws/2024/google-ads-benchmarks",
+        "title": "Google Ads Benchmarks 2024-2025",
+        "publisher": "WordStream",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-11",
+        "snippet": "Average CPC increased 10-13% in 2024; long-term CAGR approximately 4-6%"
+      },
+      "notes": "Conservative 6% for multi-year modeling; actual can be 10%+ in competitive verticals"
+    },
+    "shipping_inflation": {
+      "value": 0.06,
+      "unit": "percent",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://www.supplychaindive.com/news/fedex-2025-ground-express-freight-rate-increase/727087/",
+        "title": "FedEx, UPS announce 2025 rate increases averaging 5.9%",
+        "publisher": "Supply Chain Dive",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-10",
+        "snippet": "UPS and FedEx announced average rate increases of 5.9% effective January 2025"
+      },
+      "notes": "Annual GRI (General Rate Increase) typically 5-7%; USPS increases similar"
+    },
+    "rent_inflation": {
+      "value": 0.03,
+      "unit": "percent",
+      "confidence": 0.70,
+      "source": {
+        "url": "https://www.cushmanwakefield.com/en/united-states/insights/us-marketbeats/us-industrial-marketbeat",
+        "title": "U.S. Industrial MarketBeat Q3 2025",
+        "publisher": "Cushman & Wakefield",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-10",
+        "snippet": "Industrial rent growth moderating to 2-4% after pandemic surge"
+      },
+      "notes": "Returning to historical norms of 2-4% after 2021-2023 surge"
+    }
+  },
+  "handling_cost_multiplier": {
+    "value": 0.20,
+    "unit": "multiplier",
+    "confidence": 0.75,
+    "source": {
+      "url": "https://www.shipbob.com/blog/fulfillment-costs/",
+      "title": "Ecommerce Fulfillment Costs: What to Expect",
+      "publisher": "ShipBob",
+      "date_accessed": "2025-12-22",
+      "date_published": "2024",
+      "snippet": "Pick and pack typically runs $2-3 per order, roughly 15-25% of shipping cost"
+    },
+    "notes": "Pick and pack labor as percentage of shipping cost; 20% is industry standard"
+  }
+}

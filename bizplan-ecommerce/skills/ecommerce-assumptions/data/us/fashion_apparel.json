@@ -1,0 +1,117 @@
+{
+  "category": "fashion_apparel",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "IRP Commerce Ecommerce Market Data",
+    "overall_rate": 0.020,
+    "adjustment_factor": 0.67,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.017,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Fashion Clothing & Accessories: 2.00% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 0.67 = 0.017",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Lower than beauty due to sizing uncertainty and higher return rates"
+    },
+    "conv_organic": {
+      "value": 0.020,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Fashion Clothing & Accessories: 2.00% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 0.67 = 0.020",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Brand-aware organic shoppers convert slightly better"
+    },
+    "conv_retention": {
+      "value": 0.050,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Fashion Clothing & Accessories: 2.00% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 0.67 = 0.050",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Seasonal buying patterns; retention emails drive repeat purchases"
+    },
+    "cac_paid": {
+      "value": 45.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Apparel CAC typically $40-55 for DTC brands"
+      },
+      "notes": "Highly competitive category; Meta/TikTok ads drive most acquisition"
+    },
+    "aov_typical": {
+      "value": 95.0,
+      "unit": "usd",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Fashion, accessories, and apparel: $196 AOV (full market); DTC typically $85-110"
+      },
+      "notes": "DTC single-brand lower than multi-brand retail; premium brands $150+"
+    },
+    "gross_margin_typical": {
+      "value": 0.48,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Fashion DTC typically 44-52% gross margin after returns"
+      },
+      "notes": "Returns (20-30%) significantly impact effective margin"
+    }
+  }
+}

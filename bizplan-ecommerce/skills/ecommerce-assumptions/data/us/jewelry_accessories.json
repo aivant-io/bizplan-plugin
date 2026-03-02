@@ -1,0 +1,117 @@
+{
+  "category": "jewelry_accessories",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "Dynamic Yield XP2 Benchmarks",
+    "overall_rate": 0.0095,
+    "adjustment_factor": 0.32,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.008,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Consumer Goods (includes jewelry/accessories): 0.95% overall conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 0.32 = 0.008",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "High-consideration purchase; trust barriers for online jewelry"
+    },
+    "conv_organic": {
+      "value": 0.010,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Consumer Goods (includes jewelry/accessories): 0.95% overall conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 0.32 = 0.010",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Brand recognition crucial; direct traffic converts better"
+    },
+    "conv_retention": {
+      "value": 0.024,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Consumer Goods (includes jewelry/accessories): 0.95% overall conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 0.32 = 0.024",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Low repeat frequency; occasion-driven purchases (gifts, milestones)"
+    },
+    "cac_paid": {
+      "value": 80.0,
+      "unit": "usd",
+      "confidence": 0.70,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Jewelry CAC typically $65-95"
+      },
+      "notes": "High AOV supports higher CAC; influencer marketing effective"
+    },
+    "aov_typical": {
+      "value": 185.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Luxury and jewelry: $436 AOV (full market); DTC fashion jewelry $150-220"
+      },
+      "notes": "Fashion jewelry ~$75-120, fine jewelry $300+"
+    },
+    "gross_margin_typical": {
+      "value": 0.58,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Jewelry DTC typically 50-65% gross margin"
+      },
+      "notes": "High perceived value; materials cost varies significantly"
+    }
+  }
+}

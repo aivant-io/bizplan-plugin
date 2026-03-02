@@ -1,0 +1,117 @@
+{
+  "category": "pet_supplies",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "IRP Commerce Ecommerce Market Data",
+    "overall_rate": 0.0266,
+    "adjustment_factor": 0.89,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.022,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Pet Care: 2.66% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 0.89 = 0.022",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Emotional connection to pets drives purchase decisions"
+    },
+    "conv_organic": {
+      "value": 0.027,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Pet Care: 2.66% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 0.89 = 0.027",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Pet parents research extensively; breed-specific content performs well"
+    },
+    "conv_retention": {
+      "value": 0.067,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Pet Care: 2.66% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 0.89 = 0.067",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Food and consumables drive high repeat purchase rates; strong loyalty"
+    },
+    "cac_paid": {
+      "value": 40.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Pet supplies CAC typically $35-50"
+      },
+      "notes": "Lower CAC justified by very high LTV from repeat food purchases"
+    },
+    "aov_typical": {
+      "value": 73.0,
+      "unit": "usd",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Pet care and veterinary services: $83 AOV; DTC pet typically $65-80"
+      },
+      "notes": "Subscriptions (food, treats) increase effective AOV"
+    },
+    "gross_margin_typical": {
+      "value": 0.47,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Pet DTC typically 42-52% gross margin"
+      },
+      "notes": "Food/consumables ~40%, accessories and premium products 55%+"
+    }
+  }
+}

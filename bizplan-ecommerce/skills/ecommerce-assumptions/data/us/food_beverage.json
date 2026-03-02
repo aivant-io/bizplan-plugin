@@ -1,0 +1,117 @@
+{
+  "category": "food_beverage",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "Dynamic Yield XP2 Benchmarks",
+    "overall_rate": 0.0602,
+    "adjustment_factor": 2.01,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.050,
+      "unit": "percent",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Food & Beverage: 6.02% overall conversion rate - highest of all industries"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 2.01 = 0.050",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Highest converting category; consumable nature drives purchase intent"
+    },
+    "conv_organic": {
+      "value": 0.060,
+      "unit": "percent",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Food & Beverage: 6.02% overall conversion rate - highest of all industries"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 2.01 = 0.060",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Recipe/content-driven organic traffic converts exceptionally well"
+    },
+    "conv_retention": {
+      "value": 0.151,
+      "unit": "percent",
+      "confidence": 0.85,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/",
+        "title": "eCommerce Statistics and Benchmarks by Industry - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Food & Beverage: 6.02% overall conversion rate - highest of all industries"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 2.01 = 0.151",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Highest repeat purchase category; subscription models common"
+    },
+    "cac_paid": {
+      "value": 35.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Food & Beverage CAC typically $28-42"
+      },
+      "notes": "Lower CAC justified by high LTV from repeat purchases"
+    },
+    "aov_typical": {
+      "value": 68.0,
+      "unit": "usd",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Food and beverage: $114 AOV (full market); DTC subscription typically $55-80"
+      },
+      "notes": "Lower ticket but high frequency; subscriptions increase effective AOV"
+    },
+    "gross_margin_typical": {
+      "value": 0.42,
+      "unit": "percent",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Food/beverage DTC typically 35-48% gross margin"
+      },
+      "notes": "Perishability, cold chain, and compliance reduce margins"
+    }
+  }
+}

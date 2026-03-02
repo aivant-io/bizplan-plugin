@@ -1,0 +1,117 @@
+{
+  "category": "other",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates use cross-industry averages as baseline for uncategorized businesses",
+    "overall_rate_source": "Cross-industry average",
+    "overall_rate": 0.030,
+    "adjustment_factor": 1.00,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.025,
+      "unit": "percent",
+      "confidence": 0.60,
+      "source": {
+        "url": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/",
+        "title": "Conversion Rate by Industry: Updated Benchmarks for 2024",
+        "publisher": "Ruler Analytics",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-08",
+        "snippet": "Cross-industry paid traffic conversion rate averages 2.3-2.7%"
+      },
+      "derivation": {
+        "method": "Cross-industry average baseline",
+        "calculation": "0.025 × 1.00 = 0.025",
+        "notes": "Neutral adjustment factor for uncategorized businesses"
+      },
+      "notes": "Recommend selecting specific category if possible for more accurate benchmarks"
+    },
+    "conv_organic": {
+      "value": 0.030,
+      "unit": "percent",
+      "confidence": 0.60,
+      "source": {
+        "url": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/",
+        "title": "Conversion Rate by Industry: Updated Benchmarks for 2024",
+        "publisher": "Ruler Analytics",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-08",
+        "snippet": "Cross-industry organic traffic conversion rate averages 2.8-3.2%"
+      },
+      "derivation": {
+        "method": "Cross-industry average baseline",
+        "calculation": "0.030 × 1.00 = 0.030",
+        "notes": "Neutral adjustment factor for uncategorized businesses"
+      },
+      "notes": "Organic typically converts 1.2x better than paid due to higher intent"
+    },
+    "conv_retention": {
+      "value": 0.075,
+      "unit": "percent",
+      "confidence": 0.65,
+      "source": {
+        "url": "https://www.omnisend.com/blog/email-marketing-statistics/",
+        "title": "Email Marketing Statistics 2024",
+        "publisher": "Omnisend",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-10",
+        "snippet": "Email/retention traffic converts at 7-8% on average across ecommerce"
+      },
+      "derivation": {
+        "method": "Cross-industry average baseline",
+        "calculation": "0.075 × 1.00 = 0.075",
+        "notes": "Neutral adjustment factor for uncategorized businesses"
+      },
+      "notes": "Returning customers have 2.5-3x higher conversion than new visitors"
+    },
+    "cac_paid": {
+      "value": 55.0,
+      "unit": "usd",
+      "confidence": 0.50,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Median ecommerce CAC across categories $45-65"
+      },
+      "notes": "Median of all categories; recommend selecting specific category"
+    },
+    "aov_typical": {
+      "value": 95.0,
+      "unit": "usd",
+      "confidence": 0.55,
+      "source": {
+        "url": "https://www.oberlo.com/statistics/average-order-value-by-industry",
+        "title": "Average Order Value by Industry",
+        "publisher": "Oberlo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Cross-industry median ecommerce AOV $85-105"
+      },
+      "notes": "Median of all categories; recommend selecting specific category"
+    },
+    "gross_margin_typical": {
+      "value": 0.47,
+      "unit": "percent",
+      "confidence": 0.55,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Median DTC gross margin 44-50%"
+      },
+      "notes": "Median of all categories; recommend selecting specific category"
+    }
+  }
+}

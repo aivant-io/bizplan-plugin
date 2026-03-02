@@ -1,0 +1,10 @@
+{
+  "name": "bizplan-plugins",
+  "version": "1.0.0",
+  "description": "AI-powered business plan and financial model generators for pre-launch founders. Generate professional Excel financial models and narrative business plans with industry benchmarks.",
+  "author": {
+    "name": "Aivant"
+  },
+  "repository": "https://github.com/aivant-io/bizplan-plugin",
+  "keywords": ["business-plan", "financial-model", "ecommerce", "startup"]
+}

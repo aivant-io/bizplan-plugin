@@ -1,0 +1,8 @@
+{
+  "name": "bizplan-ecommerce",
+  "version": "0.1.0",
+  "description": "Generate professional ecommerce business plans and 6-year financial models. Takes founder inputs through a structured questionnaire, resolves industry benchmarks across 11 product categories and 5 regions, populates a pre-built Excel model with 49 drivers, and writes a narrative business plan with citations.",
+  "author": {
+    "name": "BizPlan AI"
+  }
+}

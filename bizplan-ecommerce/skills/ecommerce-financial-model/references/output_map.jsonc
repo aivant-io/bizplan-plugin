@@ -1,0 +1,588 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Output Map",
+  "description": "Maps output metrics to Excel cell addresses for reading. Used by Excel Writer to extract model outputs for the Plan Writer. All output cells are on the Model sheet. Column E = 2026 (Year 1), F = 2027, G = 2028, H = 2029, I = 2030, J = 2031.",
+  "default_sheet": "Model",
+
+  // ============================================================================
+  // YEAR HEADERS
+  // ============================================================================
+  "years": {
+    "description": "Forecast years in columns E through J",
+    "cells": {
+      "year_1": "E2",
+      "year_2": "F2",
+      "year_3": "G2",
+      "year_4": "H2",
+      "year_5": "I2",
+      "year_6": "J2"
+    }
+  },
+
+  // ============================================================================
+  // ORDERS & TRAFFIC
+  // ============================================================================
+  "orders": {
+    "total_visits": {
+      "label": "Total Annual Site Visits",
+      "type": "int",
+      "cells": {
+        "year_1": "E24",
+        "year_2": "F24",
+        "year_3": "G24",
+        "year_4": "H24",
+        "year_5": "I24",
+        "year_6": "J24"
+      }
+    },
+    "new_orders": {
+      "label": "New Orders (from traffic)",
+      "type": "int",
+      "cells": {
+        "year_1": "E37",
+        "year_2": "F37",
+        "year_3": "G37",
+        "year_4": "H37",
+        "year_5": "I37",
+        "year_6": "J37"
+      }
+    },
+    "effective_repeat_rate": {
+      "label": "Effective Repeat Rate",
+      "type": "float_pct",
+      "cells": {
+        "year_1": "E39",
+        "year_2": "F39",
+        "year_3": "G39",
+        "year_4": "H39",
+        "year_5": "I39",
+        "year_6": "J39"
+      }
+    },
+    "repeat_orders": {
+      "label": "Repeat Orders",
+      "type": "int",
+      "cells": {
+        "year_1": "E40",
+        "year_2": "F40",
+        "year_3": "G40",
+        "year_4": "H40",
+        "year_5": "I40",
+        "year_6": "J40"
+      }
+    },
+    "total_orders": {
+      "label": "Gross Orders (New + Repeat)",
+      "type": "int",
+      "description": "V2: Renamed from 'Total Orders Placed'. Now includes new + repeat orders.",
+      "cells": {
+        "year_1": "E41",
+        "year_2": "F41",
+        "year_3": "G41",
+        "year_4": "H41",
+        "year_5": "I41",
+        "year_6": "J41"
+      }
+    }
+  },
+
+  // ============================================================================
+  // INCOME STATEMENT
+  // ============================================================================
+  "income_statement": {
+    "gross_revenue": {
+      "label": "Gross Revenue",
+      "type": "currency",
+      "cells": {
+        "year_1": "E134",
+        "year_2": "F134",
+        "year_3": "G134",
+        "year_4": "H134",
+        "year_5": "I134",
+        "year_6": "J134"
+      }
+    },
+    "returns_deduction": {
+      "label": "Less: Returns & Refunds",
+      "type": "currency",
+      "cells": {
+        "year_1": "E136",
+        "year_2": "F136",
+        "year_3": "G136",
+        "year_4": "H136",
+        "year_5": "I136",
+        "year_6": "J136"
+      }
+    },
+    "platform_fees": {
+      "label": "Less: Platform Fees",
+      "type": "currency",
+      "cells": {
+        "year_1": "E137",
+        "year_2": "F137",
+        "year_3": "G137",
+        "year_4": "H137",
+        "year_5": "I137",
+        "year_6": "J137"
+      }
+    },
+    "payment_processing_fees": {
+      "label": "Less: Payment Processing",
+      "type": "currency",
+      "cells": {
+        "year_1": "E138",
+        "year_2": "F138",
+        "year_3": "G138",
+        "year_4": "H138",
+        "year_5": "I138",
+        "year_6": "J138"
+      }
+    },
+    "net_revenue": {
+      "label": "Net Revenue",
+      "type": "currency",
+      "cells": {
+        "year_1": "E139",
+        "year_2": "F139",
+        "year_3": "G139",
+        "year_4": "H139",
+        "year_5": "I139",
+        "year_6": "J139"
+      }
+    },
+    "effective_cogs_pct": {
+      "label": "Effective COGS %",
+      "type": "float_pct",
+      "cells": {
+        "year_1": "E141",
+        "year_2": "F141",
+        "year_3": "G141",
+        "year_4": "H141",
+        "year_5": "I141",
+        "year_6": "J141"
+      }
+    },
+    "gross_profit": {
+      "label": "Gross Profit",
+      "type": "currency",
+      "cells": {
+        "year_1": "E143",
+        "year_2": "F143",
+        "year_3": "G143",
+        "year_4": "H143",
+        "year_5": "I143",
+        "year_6": "J143"
+      }
+    },
+    "gross_margin_pct": {
+      "label": "Gross Margin %",
+      "type": "float_pct",
+      "cells": {
+        "year_1": "E144",
+        "year_2": "F144",
+        "year_3": "G144",
+        "year_4": "H144",
+        "year_5": "I144",
+        "year_6": "J144"
+      }
+    },
+    "contribution_margin": {
+      "label": "Contribution Margin",
+      "type": "currency",
+      "cells": {
+        "year_1": "E152",
+        "year_2": "F152",
+        "year_3": "G152",
+        "year_4": "H152",
+        "year_5": "I152",
+        "year_6": "J152"
+      }
+    },
+    "contribution_margin_pct": {
+      "label": "Contribution Margin %",
+      "type": "float_pct",
+      "cells": {
+        "year_1": "E153",
+        "year_2": "F153",
+        "year_3": "G153",
+        "year_4": "H153",
+        "year_5": "I153",
+        "year_6": "J153"
+      }
+    },
+    "ebitda": {
+      "label": "EBITDA",
+      "type": "currency",
+      "cells": {
+        "year_1": "E159",
+        "year_2": "F159",
+        "year_3": "G159",
+        "year_4": "H159",
+        "year_5": "I159",
+        "year_6": "J159"
+      }
+    },
+    "ebitda_margin_pct": {
+      "label": "EBITDA Margin %",
+      "type": "float_pct",
+      "cells": {
+        "year_1": "E160",
+        "year_2": "F160",
+        "year_3": "G160",
+        "year_4": "H160",
+        "year_5": "I160",
+        "year_6": "J160"
+      }
+    },
+    "ebt": {
+      "label": "Earnings Before Tax (EBT)",
+      "type": "currency",
+      "cells": {
+        "year_1": "E164",
+        "year_2": "F164",
+        "year_3": "G164",
+        "year_4": "H164",
+        "year_5": "I164",
+        "year_6": "J164"
+      }
+    },
+    "net_income": {
+      "label": "Net Income",
+      "type": "currency",
+      "cells": {
+        "year_1": "E167",
+        "year_2": "F167",
+        "year_3": "G167",
+        "year_4": "H167",
+        "year_5": "I167",
+        "year_6": "J167"
+      }
+    }
+  },
+
+  // ============================================================================
+  // BALANCE SHEET
+  // ============================================================================
+  "balance_sheet": {
+    "cash": {
+      "label": "Cash",
+      "type": "currency",
+      "cells": {
+        "year_1": "E175",
+        "year_2": "F175",
+        "year_3": "G175",
+        "year_4": "H175",
+        "year_5": "I175",
+        "year_6": "J175"
+      }
+    },
+    "accounts_receivable": {
+      "label": "Accounts Receivable",
+      "type": "currency",
+      "cells": {
+        "year_1": "E176",
+        "year_2": "F176",
+        "year_3": "G176",
+        "year_4": "H176",
+        "year_5": "I176",
+        "year_6": "J176"
+      }
+    },
+    "inventory": {
+      "label": "Inventory",
+      "type": "currency",
+      "cells": {
+        "year_1": "E177",
+        "year_2": "F177",
+        "year_3": "G177",
+        "year_4": "H177",
+        "year_5": "I177",
+        "year_6": "J177"
+      }
+    },
+    "total_assets": {
+      "label": "Total Assets",
+      "type": "currency",
+      "cells": {
+        "year_1": "E180",
+        "year_2": "F180",
+        "year_3": "G180",
+        "year_4": "H180",
+        "year_5": "I180",
+        "year_6": "J180"
+      }
+    },
+    "total_liabilities": {
+      "label": "Total Liabilities",
+      "type": "currency",
+      "cells": {
+        "year_1": "E187",
+        "year_2": "F187",
+        "year_3": "G187",
+        "year_4": "H187",
+        "year_5": "I187",
+        "year_6": "J187"
+      }
+    },
+    "total_equity": {
+      "label": "Total Shareholders' Equity",
+      "type": "currency",
+      "cells": {
+        "year_1": "E191",
+        "year_2": "F191",
+        "year_3": "G191",
+        "year_4": "H191",
+        "year_5": "I191",
+        "year_6": "J191"
+      }
+    },
+    "balance_check": {
+      "label": "Balance Check (should be ~0)",
+      "type": "currency",
+      "cells": {
+        "year_1": "E194",
+        "year_2": "F194",
+        "year_3": "G194",
+        "year_4": "H194",
+        "year_5": "I194",
+        "year_6": "J194"
+      }
+    }
+  },
+
+  // ============================================================================
+  // CASH FLOW STATEMENT
+  // ============================================================================
+  "cash_flow": {
+    "operating_cash_flow": {
+      "label": "Net Cash from Operating Activities",
+      "type": "currency",
+      "cells": {
+        "year_1": "E205",
+        "year_2": "F205",
+        "year_3": "G205",
+        "year_4": "H205",
+        "year_5": "I205",
+        "year_6": "J205"
+      }
+    },
+    "investing_cash_flow": {
+      "label": "Net Cash from Investing Activities",
+      "type": "currency",
+      "cells": {
+        "year_1": "E209",
+        "year_2": "F209",
+        "year_3": "G209",
+        "year_4": "H209",
+        "year_5": "I209",
+        "year_6": "J209"
+      }
+    },
+    "financing_cash_flow": {
+      "label": "Net Cash from Financing Activities",
+      "type": "currency",
+      "cells": {
+        "year_1": "E218",
+        "year_2": "F218",
+        "year_3": "G218",
+        "year_4": "H218",
+        "year_5": "I218",
+        "year_6": "J218"
+      }
+    },
+    "closing_cash_balance": {
+      "label": "Closing Cash Balance",
+      "type": "currency",
+      "cells": {
+        "year_1": "E222",
+        "year_2": "F222",
+        "year_3": "G222",
+        "year_4": "H222",
+        "year_5": "I222",
+        "year_6": "J222"
+      }
+    }
+  },
+
+  // ============================================================================
+  // OPERATING & UNIT ECONOMICS METRICS
+  // ============================================================================
+  "operating_metrics": {
+    "cac": {
+      "label": "Customer Acquisition Cost (CAC)",
+      "type": "currency",
+      "description": "Marketing spend / new customers acquired via paid",
+      "cells": {
+        "year_1": "E255",
+        "year_2": "F255",
+        "year_3": "G255",
+        "year_4": "H255",
+        "year_5": "I255",
+        "year_6": "J255"
+      }
+    },
+    "contribution_margin_per_order": {
+      "label": "Contribution Margin Per Order",
+      "type": "currency",
+      "description": "(Contribution margin + marketing) / total orders",
+      "cells": {
+        "year_1": "E256",
+        "year_2": "F256",
+        "year_3": "G256",
+        "year_4": "H256",
+        "year_5": "I256",
+        "year_6": "J256"
+      }
+    },
+    "payback_orders": {
+      "label": "Payback (# of orders)",
+      "type": "float",
+      "description": "CAC / contribution margin per order - how many orders to recoup CAC",
+      "cells": {
+        "year_1": "E257",
+        "year_2": "F257",
+        "year_3": "G257",
+        "year_4": "H257",
+        "year_5": "I257",
+        "year_6": "J257"
+      }
+    },
+    "burn_rate": {
+      "label": "Burn Rate (Annual)",
+      "type": "currency",
+      "description": "Operating cash flow minus investing cash flow",
+      "cells": {
+        "year_1": "E258",
+        "year_2": "F258",
+        "year_3": "G258",
+        "year_4": "H258",
+        "year_5": "I258",
+        "year_6": "J258"
+      }
+    }
+  },
+
+  // ============================================================================
+  // EXPENSE BREAKDOWN (for narrative context)
+  // ============================================================================
+  "expenses": {
+    "marketing_spend": {
+      "label": "Marketing Spend (Paid Acquisition)",
+      "type": "currency",
+      "cells": {
+        "year_1": "E147",
+        "year_2": "F147",
+        "year_3": "G147",
+        "year_4": "H147",
+        "year_5": "I147",
+        "year_6": "J147"
+      }
+    },
+    "shipping_handling": {
+      "label": "Shipping & Handling",
+      "type": "currency",
+      "cells": {
+        "year_1": "E148",
+        "year_2": "F148",
+        "year_3": "G148",
+        "year_4": "H148",
+        "year_5": "I148",
+        "year_6": "J148"
+      }
+    },
+    "packaging_costs": {
+      "label": "Packaging Costs",
+      "type": "currency",
+      "cells": {
+        "year_1": "E149",
+        "year_2": "F149",
+        "year_3": "G149",
+        "year_4": "H149",
+        "year_5": "I149",
+        "year_6": "J149"
+      }
+    },
+    "support_costs": {
+      "label": "Customer Support Costs",
+      "type": "currency",
+      "cells": {
+        "year_1": "E150",
+        "year_2": "F150",
+        "year_3": "G150",
+        "year_4": "H150",
+        "year_5": "I150",
+        "year_6": "J150"
+      }
+    },
+    "fulfilment_variable": {
+      "label": "Total Variable Costs",
+      "type": "currency",
+      "description": "V2: Now includes shipping & handling + packaging + customer support",
+      "cells": {
+        "year_1": "E151",
+        "year_2": "F151",
+        "year_3": "G151",
+        "year_4": "H151",
+        "year_5": "I151",
+        "year_6": "J151"
+      }
+    },
+    "total_fixed_costs": {
+      "label": "Total Fixed Operating Costs",
+      "type": "currency",
+      "cells": {
+        "year_1": "E158",
+        "year_2": "F158",
+        "year_3": "G158",
+        "year_4": "H158",
+        "year_5": "I158",
+        "year_6": "J158"
+      }
+    },
+    "saas_technology": {
+      "label": "SaaS / Technology Costs",
+      "type": "currency",
+      "cells": {
+        "year_1": "E97",
+        "year_2": "F97",
+        "year_3": "G97",
+        "year_4": "H97",
+        "year_5": "I97",
+        "year_6": "J97"
+      }
+    },
+    "total_ga": {
+      "label": "Total G&A",
+      "type": "currency",
+      "cells": {
+        "year_1": "E98",
+        "year_2": "F98",
+        "year_3": "G98",
+        "year_4": "H98",
+        "year_5": "I98",
+        "year_6": "J98"
+      }
+    }
+  },
+
+  // ============================================================================
+  // DERIVED / COMPUTED OUTPUTS (Excel Writer calculates these, not reads)
+  // ============================================================================
+  "derived_metrics": {
+    "description": "These are computed by Excel Writer from the raw outputs above, not read from cells. All formulas are deterministic — no reasoning required.",
+    "metrics": {
+      "revenue_cagr": {
+        "label": "Revenue CAGR (Year 1 to Year 6)",
+        "formula": "((net_revenue_year_6 / net_revenue_year_1) ^ (1/5)) - 1"
+      },
+      "break_even_year": {
+        "label": "Break-Even Year",
+        "formula": "First year where net_income > 0 (or null if never profitable)"
+      },
+      "runway_months": {
+        "label": "Runway (months from Year 1 cash)",
+        "formula": "If burn_rate_year_1 < 0: closing_cash_year_1 / abs(burn_rate_year_1 / 12), else null"
+      }
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "category": "sports_outdoors",
+  "region": "US",
+  "last_updated": "2025-12-22",
+  "methodology": {
+    "description": "Conversion rates derived from industry-specific overall rate applied to traffic source base rates",
+    "overall_rate_source": "IRP Commerce Ecommerce Market Data",
+    "overall_rate": 0.0203,
+    "adjustment_factor": 0.68,
+    "base_rates": {
+      "paid": 0.025,
+      "organic": 0.030,
+      "retention": 0.075
+    }
+  },
+  "benchmarks": {
+    "conv_paid": {
+      "value": 0.017,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Sports and Recreation: 2.03% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × paid traffic base ratio",
+        "calculation": "0.025 × 0.68 = 0.017",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Seasonal demand patterns; research-heavy purchase process"
+    },
+    "conv_organic": {
+      "value": 0.020,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Sports and Recreation: 2.03% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × organic traffic base ratio",
+        "calculation": "0.030 × 0.68 = 0.020",
+        "traffic_ratio_source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+      },
+      "notes": "Sport-specific content and reviews drive organic conversions"
+    },
+    "conv_retention": {
+      "value": 0.051,
+      "unit": "percent",
+      "confidence": 0.80,
+      "source": {
+        "url": "https://www.irpcommerce.com/en/gb/EcommerceMarketData.aspx",
+        "title": "Ecommerce Market Data - November 2025",
+        "publisher": "IRP Commerce",
+        "date_accessed": "2025-12-22",
+        "date_published": "2025-11",
+        "snippet": "Sports and Recreation: 2.03% conversion rate"
+      },
+      "derivation": {
+        "method": "Industry overall rate × email/retention traffic base ratio",
+        "calculation": "0.075 × 0.68 = 0.051",
+        "traffic_ratio_source": "https://www.omnisend.com/blog/email-marketing-statistics/"
+      },
+      "notes": "Enthusiast communities have strong loyalty; seasonal promotions effective"
+    },
+    "cac_paid": {
+      "value": 55.0,
+      "unit": "usd",
+      "confidence": 0.70,
+      "source": {
+        "url": "https://www.klaviyo.com/blog/customer-acquisition-cost",
+        "title": "Customer Acquisition Cost Benchmarks by Industry",
+        "publisher": "Klaviyo",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-09",
+        "snippet": "Sports/outdoor CAC typically $45-65"
+      },
+      "notes": "Influencer marketing effective for niche sports"
+    },
+    "aov_typical": {
+      "value": 110.0,
+      "unit": "usd",
+      "confidence": 0.75,
+      "source": {
+        "url": "https://marketing.dynamicyield.com/benchmarks/average-order-value/",
+        "title": "Average Order Value Benchmarks - XP2",
+        "publisher": "Dynamic Yield (Mastercard)",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024-12",
+        "snippet": "Sports & Outdoors DTC typically $95-125 AOV"
+      },
+      "notes": "Wide range: apparel $60-90, equipment $150-300+"
+    },
+    "gross_margin_typical": {
+      "value": 0.44,
+      "unit": "percent",
+      "confidence": 0.70,
+      "source": {
+        "url": "https://www.drivepoint.io/post/understanding-margins-and-revenue-in-dtc-ecommerce",
+        "title": "Understanding Margins and Revenue in DTC Ecommerce",
+        "publisher": "Drivepoint",
+        "date_accessed": "2025-12-22",
+        "date_published": "2024",
+        "snippet": "Sports/outdoor DTC typically 40-48% gross margin"
+      },
+      "notes": "Brand premium possible in niche sports; commodity items lower margin"
+    }
+  }
+}

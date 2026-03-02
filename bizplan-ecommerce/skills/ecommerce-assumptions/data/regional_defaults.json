@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "description": "Regional benchmark defaults for ecommerce financial modeling",
+    "last_updated": "2025-12-22",
+    "version": "1.0.0"
+  },
+  "regions": {
+    "US": {
+      "effective_tax_rate": {
+        "value": 0.26,
+        "unit": "percent",
+        "confidence": 0.9,
+        "source": {
+          "url": "https://taxfoundation.org/data/all/state/state-corporate-income-tax-rates-brackets-2024/",
+          "title": "State Corporate Income Tax Rates and Brackets, 2024",
+          "publisher": "Tax Foundation",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024-01",
+          "snippet": "Federal 21% + weighted state average ~5% = 26% combined effective rate"
+        },
+        "notes": "Federal 21% + average state rate ~5% (varies by state from 0% to 11.5%)"
+      },
+      "salary_multiplier": {
+        "value": 1.0,
+        "unit": "multiplier",
+        "confidence": 0.95,
+        "source": {
+          "url": "https://www.bls.gov/oes/current/oes_nat.htm",
+          "title": "Occupational Employment and Wage Statistics",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024-05",
+          "snippet": "Baseline reference for US ecommerce operations salaries (~$72k median)"
+        },
+        "notes": "US is baseline reference (multiplier = 1.0) for all other regions"
+      },
+      "shipping_cost_per_order": {
+        "value": 8.50,
+        "unit": "usd",
+        "confidence": 0.85,
+        "source": {
+          "url": "https://www.simpleglobal.com/faqs/what-is-the-average-cost-of-shipping-an-ecommerce-order/",
+          "title": "What is the Average Cost of Shipping an Ecommerce Order?",
+          "publisher": "Simple Global",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average ecommerce shipping cost in the US ranges from $7-10 per order"
+        },
+        "notes": "Domestic shipping, standard ground, 1-3lb package typical"
+      }
+    },
+    "UK": {
+      "effective_tax_rate": {
+        "value": 0.19,
+        "unit": "percent",
+        "confidence": 0.95,
+        "source": {
+          "url": "https://www.gov.uk/government/publications/rates-and-allowances-corporation-tax/rates-and-allowances-corporation-tax",
+          "title": "Rates and Allowances: Corporation Tax",
+          "publisher": "UK Government (HMRC)",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024-04",
+          "snippet": "Small profits rate of 19% applies for companies with profits up to £50,000"
+        },
+        "notes": "Small profits rate for pre-launch/early-stage businesses; main rate is 25% for profits over £250,000"
+      },
+      "salary_multiplier": {
+        "value": 0.85,
+        "unit": "multiplier",
+        "confidence": 0.75,
+        "source": {
+          "url": "https://www.glassdoor.co.uk/Salaries/ecommerce-manager-salary-SRCH_KO0,17.htm",
+          "title": "Ecommerce Manager Salaries in United Kingdom",
+          "publisher": "Glassdoor UK",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average ecommerce manager salary £42,000-52,000 (~$52,000-65,000 USD)"
+        },
+        "notes": "Lower nominal salaries but similar purchasing power; London significantly higher"
+      },
+      "shipping_cost_per_order": {
+        "value": 7.10,
+        "unit": "usd",
+        "confidence": 0.80,
+        "source": {
+          "url": "https://www.royalmail.com/business/shipping/uk-delivery",
+          "title": "UK Delivery Services for Business",
+          "publisher": "Royal Mail",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Tracked parcel £5.50-6.50 (~$7 USD)"
+        },
+        "notes": "Smaller geography = lower shipping costs; converted from GBP at 1.27 USD/GBP"
+      }
+    },
+    "EU": {
+      "effective_tax_rate": {
+        "value": 0.213,
+        "unit": "percent",
+        "confidence": 0.80,
+        "source": {
+          "url": "https://taxfoundation.org/data/all/eu/corporate-tax-rates-europe-2024/",
+          "title": "Corporate Tax Rates in Europe, 2024",
+          "publisher": "Tax Foundation",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024-02",
+          "snippet": "EU average corporate tax rate 21.3%; Germany 29.9%, France 25.8%, Ireland 12.5%"
+        },
+        "notes": "EU average 21.3%; significant variation by country (Germany 29.9%, Ireland 12.5%)"
+      },
+      "salary_multiplier": {
+        "value": 0.90,
+        "unit": "multiplier",
+        "confidence": 0.70,
+        "source": {
+          "url": "https://www.salaryexpert.com/salary/job/e-commerce-manager/germany",
+          "title": "E-commerce Manager Salary in Germany",
+          "publisher": "SalaryExpert",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average ecommerce manager salary €55,000-68,000 in Germany (~$60,000-74,000 USD)"
+        },
+        "notes": "Weighted average of DE, FR, NL; higher taxes but social benefits included"
+      },
+      "shipping_cost_per_order": {
+        "value": 8.00,
+        "unit": "usd",
+        "confidence": 0.70,
+        "source": {
+          "url": "https://ecommercenews.eu/the-average-shipping-costs-in-europe/",
+          "title": "The Average Shipping Costs in Europe",
+          "publisher": "Ecommerce News Europe",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average shipping cost €7.00 across EU (€3.20 to €24.45 range)"
+        },
+        "notes": "Intra-EU shipping; cross-border adds complexity; converted from EUR at 1.08 USD/EUR"
+      }
+    },
+    "CA": {
+      "effective_tax_rate": {
+        "value": 0.122,
+        "unit": "percent",
+        "confidence": 0.90,
+        "source": {
+          "url": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/corporations/corporation-tax-rates.html",
+          "title": "Corporation Tax Rates",
+          "publisher": "Canada Revenue Agency",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Small business rate: 9% federal + ~3% provincial average = 12.2% (income under $500k)"
+        },
+        "notes": "Small business deduction applies; general rate 15% federal + ~12% provincial"
+      },
+      "salary_multiplier": {
+        "value": 0.95,
+        "unit": "multiplier",
+        "confidence": 0.80,
+        "source": {
+          "url": "https://www.payscale.com/research/CA/Job=eCommerce_Manager/Salary",
+          "title": "eCommerce Manager Salary in Canada",
+          "publisher": "PayScale",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average salary CAD $68,000-85,000 (~$50,000-63,000 USD)"
+        },
+        "notes": "Similar to US but slightly lower nominal; strong tech sector in Toronto/Vancouver"
+      },
+      "shipping_cost_per_order": {
+        "value": 12.00,
+        "unit": "usd",
+        "confidence": 0.75,
+        "source": {
+          "url": "https://www.canadapost-postescanada.ca/cpc/en/business/shipping/find-rates-shipping-options.page",
+          "title": "Shipping Rates",
+          "publisher": "Canada Post",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Standard parcel CAD $15-18 for domestic shipping"
+        },
+        "notes": "Higher due to large geography and lower population density"
+      }
+    },
+    "AU": {
+      "effective_tax_rate": {
+        "value": 0.25,
+        "unit": "percent",
+        "confidence": 0.95,
+        "source": {
+          "url": "https://www.ato.gov.au/tax-rates-and-codes/company-tax-rates",
+          "title": "Company Tax Rates",
+          "publisher": "Australian Taxation Office",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Base rate entity: 25% for companies with turnover under $50M AUD"
+        },
+        "notes": "Base rate entity (small business) rate; reduces to 25% for all companies from 2024-25"
+      },
+      "salary_multiplier": {
+        "value": 1.05,
+        "unit": "multiplier",
+        "confidence": 0.80,
+        "source": {
+          "url": "https://www.seek.com.au/career-advice/role/ecommerce-manager/salary",
+          "title": "Ecommerce Manager Salary in Australia",
+          "publisher": "SEEK Australia",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Average salary AUD $95,000-110,000 (~$62,000-72,000 USD) plus 11.5% superannuation"
+        },
+        "notes": "Higher nominal salaries; 11.5% mandatory superannuation adds to employer costs"
+      },
+      "shipping_cost_per_order": {
+        "value": 9.15,
+        "unit": "usd",
+        "confidence": 0.80,
+        "source": {
+          "url": "https://auspost.com.au/business/shipping/postage-costs",
+          "title": "Business Postage Costs",
+          "publisher": "Australia Post",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024",
+          "snippet": "Standard parcel AUD $12-16 (~$8-11 USD)"
+        },
+        "notes": "Higher due to geography and lower population density"
+      }
+    },
+    "other": {
+      "effective_tax_rate": {
+        "value": 0.25,
+        "unit": "percent",
+        "confidence": 0.40,
+        "source": {
+          "url": "https://taxfoundation.org/data/all/global/corporate-tax-rates-by-country-2024/",
+          "title": "Corporate Tax Rates by Country, 2024",
+          "publisher": "Tax Foundation",
+          "date_accessed": "2025-12-22",
+          "date_published": "2024-12",
+          "snippet": "Global average corporate tax rate approximately 23-25%"
+        },
+        "notes": "Conservative default based on global average; recommend region-specific research"
+      },
+      "salary_multiplier": {
+        "value": 0.75,
+        "unit": "multiplier",
+        "confidence": 0.40,
+        "source": {
+          "url": null,
+          "title": "Estimated global average",
+          "publisher": "Internal estimate",
+          "date_accessed": "2025-12-22",
+          "date_published": null,
+          "snippet": null
+        },
+        "notes": "Conservative default; weighted toward emerging markets"
+      },
+      "shipping_cost_per_order": {
+        "value": 8.00,
+        "unit": "usd",
+        "confidence": 0.40,
+        "source": {
+          "url": null,
+          "title": "Estimated global average",
+          "publisher": "Internal estimate",
+          "date_accessed": "2025-12-22",
+          "date_published": null,
+          "snippet": null
+        },
+        "notes": "Conservative default based on US baseline"
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+    "business_profile": {
+      "store_name": "GlowHaus",
+      "description": "Clean skincare products for women in their 20s–30s",
+      "category": "beauty_personal_care",        // from Q3; enum of your category list
+      "customer_region": "US",                   // from Q4 (where customers are)
+      "tax_country": "US"                        // Q4 override, or same as customer_region
+    },
+  
+    "strategy": {
+      "financial_priority": "growth_first",      // Q5: profit_first | balanced | growth_first
+      "growth_ambition": "aggressive"           // Q6: conservative | base | aggressive
+    },
+  
+    "demand": {
+      "year1_orders_bucket": "1_5k",             // Q7: lt_1k | 1_5k | 5_20k | gt_20k
+      "repeat_expectation": "low"                // Q7b: none | low | medium | high
+    },
+  
+    "pricing": {
+      "aov_mode": "band",                        // Q8: explicit | band
+      "aov_year1": null,                         // filled if aov_mode = explicit
+      "aov_band": "30_80"                        // Q8: lt_30 | 30_80 | 80_200 | gt_200
+    },
+  
+    "acquisition": {
+      "primary_channels": [
+        "paid_ads",
+        "retention_email_sms"
+      ],                                         // Q9: subset of [paid_ads, organic_direct, retention_email_sms]
+      "use_standard_mix": false,                // true if user chose “Not sure – use a standard mix”
+      "conv_difficulty": "average",             // Q10: hard | average | easy | very_easy
+  
+      "has_paid_ads_experience": true,          // Q11: yes/no
+      "cac_mode": "band",                       // Q11: none | band | explicit
+      "cac_band": "10_30",                      // Q11b: lt_10 | 10_30 | 30_80 | gt_80
+      "cac_explicit": null                      // Q11a: numeric if cac_mode = explicit
+    },
+  
+    "unit_economics": {
+      "gross_margin_mode": "band",              // Q12: explicit | band
+      "gross_margin_target_pct": null,          // Q12a: if explicit
+      "gross_margin_band": "high",              // Q12b: low | medium | high
+  
+      "shipping_cost_mode": "band",             // Q13: explicit | band
+      "shipping_plus_packaging_per_order": null,// Q13a: numeric if explicit
+      "shipping_cost_band": "normal",           // Q13b: very_low | normal | high
+
+      "sales_platform": "dtc_website",           // Q6b: dtc_website | amazon | etsy | multi_channel
+
+      "fulfilment_mode_year1": "not_sure"       // Q13c: self_fulfill | third_party_fulfillment | dropship_pod | not_sure
+      // (discounts/promos can be added later with its own mode+band if you expose a question)
+    },
+  
+    "team_overhead": {
+      "team_cost_mode": "estimate",             // Q14: explicit | estimate
+      "team_cost_year1": null,                  // Q14a: if explicit
+      "team_size_bucket": "2_3",                // Q14b: 0_1 | 2_3 | 4_7 | 8_plus
+      "salary_level": "mid",                    // Q14b: low | mid | high
+  
+      "other_fixed_costs_mode": "band",         // Q15: explicit | band
+      "other_fixed_costs_year1": null,          // Q15a: if explicit
+      "other_fixed_costs_band": "moderate",     // Q15b: lean | moderate | heavy
+  
+      "overhead_inflation_band": "3_5"          // Q16: flat | 3_5 | 5_10
+    },
+  
+    "working_capital": {
+      "inventory_intensity": "1_2_months",      // Q17: no_stock | 1_2_months | 3_plus_months
+      "customer_payment_terms": "upfront",      // Q18: upfront | mostly_upfront | invoice
+      "supplier_payment_terms": "30_days"       // Q19: 15_days | 30_days | 45_60_days
+    },
+  
+    "funding_tax": {
+      "equity_mode": "explicit",                // Q20: explicit | suggest
+      "equity_injection": 80000,                // Q20a: if explicit
+  
+      "loan_plan": "none",                      // Q21: none | term_loan
+      "loan_amount": null,                      // Q21a: if term_loan
+      "loan_interest_mode": null,               // Q21b: band | explicit | null (null if loan_plan = none)
+      "loan_interest_band": null,               // Q21b: 5_8 | 8_12 | gt_12 (if band)
+      "loan_interest_pct": null,                // Q21c: numeric if explicit
+      "loan_term_years": null,                  // Q21d: if term_loan
+  
+      "tax_rate_mode": "typical",               // Q22: typical | explicit
+      "tax_rate_pct": null                      // Q22a: numeric if explicit
+    }
+  }
+  
+
