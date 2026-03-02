@@ -32,7 +32,7 @@ The ecommerce vertical runs 5 sequential skills, each consuming the prior stage'
 1. **ecommerce-intake** — 22-question founder questionnaire across 8 sections with conditional branching → intake JSON (`intake_schema.jsonc`)
 2. **ecommerce-assumptions** — Resolves all 49 financial drivers using category benchmarks from `data/us/{category}.json`, global/regional defaults, and calculation formulas → assumptions JSON
 3. **ecommerce-financial-model** — Populates Excel template via XML editing, recalculates with xlcalculator, runs equity optimization loop → `.xlsx` + model outputs JSON
-4. **ecommerce-business-plan** — 3-stage writer: market research (max 8 web searches), narrative (5,500-7,000 words, 7 sections), citation verification → markdown
+4. **ecommerce-business-plan** — 3-stage writer: market research (curated benchmarks + structured web search across 4 research areas), narrative (5,500-7,000 words, 7 sections), citation verification → markdown
 5. **ecommerce-document-export** — Pandoc conversion with `reference.docx` template → `.docx`
 
 ## Critical Technical Rules

@@ -29,7 +29,7 @@ pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
 ### Step 4: Write Business Plan
 Use skill: `ecommerce-business-plan`
 
-Generate a 5,500-7,000 word business plan with 7 required sections. Perform market research (max 8 web searches), write the narrative with bracket citations, and verify all citations mechanically. Include equity warning if applicable.
+Generate a 5,500-7,000 word business plan with 7 required sections. Perform structured market research (curated category benchmarks, then web search for market sizing, consumer trends, competitive landscape, and category-specific factors), write the narrative with bracket citations, and verify all citations mechanically. Include equity warning if applicable.
 
 ### Step 5: Export to DOCX (Optional)
 Use skill: `ecommerce-document-export`

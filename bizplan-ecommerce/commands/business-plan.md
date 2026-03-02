@@ -28,7 +28,7 @@ Use skill: `ecommerce-financial-model`
 ### Step 4: Write Business Plan
 Use skill: `ecommerce-business-plan`
 
-Generate a 5,500-7,000 word plan with 7 sections, bracket citations, and market research.
+Generate a 5,500-7,000 word plan with 7 sections, bracket citations, and structured market research.
 
 ### Step 5: Export to DOCX (Optional)
 Use skill: `ecommerce-document-export`

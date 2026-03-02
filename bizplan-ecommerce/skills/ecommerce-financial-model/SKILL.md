@@ -294,6 +294,10 @@ while min_cash < $1,000 buffer AND iterations < 5:
 - `min_cash >= $1,000` (positive cash achieved)
 - `iterations >= 5` (max attempts reached)
 
+**If max iterations reached without convergence**: Proceed with the final equity value from iteration 5. Append a warning to the equity_warning field in the model outputs:
+- Format: `"**Funding Note:** Equity optimization ran 5 iterations without achieving a +$1,000 cash buffer (final min cash: $X). The recommended equity injection of $Y is the best approximation. Consider adjusting pricing, margins, or team costs to improve cash flow, or plan for additional funding rounds."`
+- This warning is passed to the business plan writer and included in the Financial Plan section.
+
 #### Mode B: EXPLICIT (User-Specified, No Changes)
 
 Do NOT modify the user's equity amount. If cash goes negative:

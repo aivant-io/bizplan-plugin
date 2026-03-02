@@ -6,7 +6,7 @@ description: >
   tracking, narrative writing with bracket citations, and mechanical citation
   verification. Produces a 5,500-7,000 word plan with 7 required sections
   incorporating Excel model outputs and web-researched market context.
-compatibility: Web search for market research (max 8 searches).
+compatibility: Web search for market research.
 ---
 
 # Ecommerce Business Plan Writer
@@ -28,21 +28,50 @@ The plan writer uses three distinct stages to ensure citation accuracy.
 
 ### Stage 1: Market Research & Source Collection
 
-Perform focused web searches to gather market context for the founder's category and region. Track all sources with sequential IDs.
+Gather market context for the founder's category and region using a two-phase approach: curated benchmarks first, then targeted web research for gaps.
 
-**Guidelines:**
-- Max 8 web searches
-- Target 10-15 unique sources
-- Focus on: market size, growth rates, consumer trends, competitive landscape, industry benchmarks
-- Track each source: `{id: 1, title: "...", url: "...", snippet: "...", accessed_at: "..."}`
+#### Phase 1 — Load Curated Benchmarks (before any web search)
+
+Read the founder's category benchmark file from `bizplan-ecommerce/skills/ecommerce-assumptions/data/us/{category}.json` and extract citable data points:
+- Conversion rates (paid, organic, retention) with source citations
+- CAC, AOV, gross margin ranges with source citations
+- Methodology notes and confidence scores
+
+Also load `data/global_defaults.json` (inflation rates with sources) and `data/regional_defaults.json` (tax rates, shipping costs with sources).
+
+Register these as the **first source entries** in the source tracker (sequential IDs starting at 1). These are pre-vetted, high-confidence benchmarks — cite them when contextualizing the founder's model assumptions in the narrative.
+
+Available curated sources (use only those relevant to the founder's category):
+- IRP Commerce — conversion rates by category (Nov 2025)
+- Dynamic Yield XP2 / Mastercard — conversion benchmarks, 200M+ users (Dec 2024)
+- Klaviyo — CAC benchmarks by category (Sep 2024)
+- Oberlo — AOV benchmarks by industry (Sep 2024)
+- Drivepoint — DTC ecommerce margin analysis (2024)
+
+#### Phase 2 — Web Search for Gaps
+
+Allocate searches across these research areas (the benchmarks don't cover these):
+
+1. **Market sizing & growth** (2-4 searches) — TAM, SAM, growth rate, and forecast data for the founder's specific category and region. Prioritize reports with quantified market values.
+2. **Consumer trends** (2-3 searches) — Behavioral shifts, demographic trends, and demand drivers relevant to the category. Look for data from the last 2 years.
+3. **Competitive landscape** (2-4 searches) — Identify 3-5 direct competitors or comparable DTC brands. Gather: positioning, approximate revenue/scale, pricing strategy, key differentiators, funding history if available.
+4. **Regulatory or category-specific** (0-2 searches) — Only if relevant (e.g., FDA for supplements, import tariffs, sustainability certifications).
+
+Adapt depth to the market: well-documented categories (beauty, fashion) may need fewer searches; niche or emerging categories may need more. Stop when you have sufficient coverage across all areas, not at an arbitrary number.
+
+**Source quality rules:**
+- Target 12-20 unique sources total (curated benchmarks + web research combined)
+- **Prefer recent sources** (2024-2026). Deprioritize anything older than 3 years unless it is a foundational market report.
 - De-duplicate by URL
-- Assign sequential IDs: 1, 2, 3, etc.
+- Track each source: `{id: N, title: "...", url: "...", snippet: "...", accessed_at: "..."}`
+- Continue sequential IDs from where the curated benchmark sources left off
 
-**Source priority:**
-1. Industry reports (Statista, IBISWorld, Grand View Research)
-2. Trade publications (eMarketer, Retail Dive, Shopify reports)
+**Source priority (for web searches):**
+1. Industry reports (Statista, IBISWorld, Grand View Research, Mordor Intelligence)
+2. Trade publications (eMarketer, Retail Dive, Shopify reports, CB Insights)
 3. Market analysis (McKinsey, Bain, Deloitte retail reports)
-4. News articles (recent market developments)
+4. Competitor profiles (Crunchbase, brand websites, press coverage)
+5. News articles (recent market developments, funding rounds)
 
 ### Stage 2: Plan Writing
 
@@ -50,11 +79,22 @@ Write the narrative using ONLY sources collected in Stage 1. Web search is NOT a
 
 **Citation rules:**
 - Use `[N]` bracket format mapped to Stage 1 source IDs
-- **CITE**: Market size, growth rates, demographics, competitive landscape, industry trends, external benchmarks
+- **CITE**: Market size, growth rates, demographics, competitive landscape, industry trends, external benchmarks, competitor data
 - **DO NOT CITE**: Company projections from the Excel model (revenue, orders, margins, CAC/LTV — these are our own numbers)
 - **Key distinction**: "Industry average CAC is $45 [3]" vs "Our target CAC is $45" (no citation)
 - Never invent citation numbers — only use IDs from Stage 1 sources
-- Target citation density: 8-15 citations across the full plan
+
+**Per-section citation guidance:**
+
+| Section | Target citations | Notes |
+|---------|-----------------|-------|
+| Executive Summary | 1-2 | Only headline market stats |
+| Business Overview | 1-3 | Market timing, category context |
+| Market Opportunity | 6-10 | Heaviest — TAM, growth, trends, competitors |
+| Go-to-Market Strategy | 2-4 | Channel benchmarks, industry CAC/conversion data |
+| Operations | 0-2 | Fulfillment trends, logistics benchmarks if available |
+| Financial Plan | 1-3 | Industry margin or growth benchmarks for context |
+| Appendix | 0 | Sources listed here, not cited |
 
 ### Stage 3: Citation Verification
 
@@ -81,11 +121,15 @@ Mechanically verify all citations after writing:
 - Why now — timing and market opportunity
 
 ### 3. Market Opportunity
-- **CITE HEAVILY** — this is where most citations belong
-- Total addressable market (TAM) with source
-- Market growth rate and trends
-- Consumer behavior shifts relevant to the category
-- Competitive landscape: key players, market fragmentation
+- **CITE HEAVILY** — this section should carry the majority of citations
+- Total addressable market (TAM) with source, and serviceable addressable market (SAM) if data available
+- Market growth rate and forecasted trajectory
+- Consumer behavior shifts relevant to the category (last 2-3 years)
+- **Competitive landscape** (dedicate 2-3 paragraphs):
+  - Name 3-5 direct competitors or comparable DTC brands
+  - For each: positioning, approximate scale, pricing tier, key differentiator
+  - Identify whitespace or positioning gaps the founder can exploit
+  - Note any recent market entries, exits, or funding rounds
 - Regional market context (founder's customer region)
 
 ### 4. Go-to-Market Strategy
@@ -147,6 +191,11 @@ Use these Excel model outputs throughout the narrative:
 - Orders: "3,000 orders" with commas
 - Growth: "35% CAGR"
 
+**Integration approach:**
+- **Headline metrics** (feature in key sentences): Year 1 revenue, Year 3 revenue, break-even year, initial funding, revenue CAGR, gross margin. These should appear in topic sentences or summary statements.
+- **Supporting metrics** (provide depth): Unit economics (CAC, contribution margin, payback), cash flow details, expense breakdowns. Use these in explanatory paragraphs or comparison tables.
+- **Contextual contrast**: Where possible, pair a model output with a sourced benchmark: "We target a 48% gross margin, consistent with the 50-60% range typical of DTC beauty brands [5]."
+
 ## Writing Style
 
 - **Voice**: First-person plural ("we", "our", "us") — founder perspective
@@ -199,5 +248,5 @@ Include in the Appendix:
 3. **Never invent citations** — only use source IDs from Stage 1 research
 4. **Use exact model numbers** — don't round "$152,340" to "about $150,000"
 5. **Pre-launch tense** — "we plan to", "we target", "we expect" (not "we achieved")
-6. **Max 8 web searches** — be focused and efficient with research
+6. **Purposeful research** — every search should target a specific research area from the Stage 1 strategy; do not search aimlessly or repeat failed queries
 7. **Remove orphan citations** — any `[N]` without a matching source must be cleaned
