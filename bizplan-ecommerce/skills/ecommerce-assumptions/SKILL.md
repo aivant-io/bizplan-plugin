@@ -22,6 +22,7 @@ This skill resolves **49 writable financial model drivers** from a founder's int
 
 For full driver definitions (types, bounds, semantics), see [references/driver_catalog.jsonc](references/driver_catalog.jsonc).
 For detailed heuristics and category adjustments, see [references/deep_research_policy.md](references/deep_research_policy.md).
+For the rationale behind each mapping table value, see [references/heuristic_rationale.md](references/heuristic_rationale.md).
 
 ## Resolution Pipeline
 
@@ -136,8 +137,8 @@ traffic_total_year1 = round(total_orders_year1_target / weighted_conv)
 | Priority     | Default % |
 |-------------|----------|
 | profit_first | 0.05     |
-| balanced     | 0.175    |
-| growth_first | 0.30     |
+| balanced     | 0.10     |
+| growth_first | 0.20     |
 
 **Return Rate** by category:
 
@@ -189,11 +190,28 @@ traffic_total_year1 = round(total_orders_year1_target / weighted_conv)
 | third_party   | max($2.50, 30% of ship_cost)     |
 | dropship_pod  | max($0.50, 5% of ship_cost)      |
 
+**Packaging Cost Per Order** — By category type:
+
+| Category type | $/order | Categories |
+|--------------|---------|-----------|
+| lightweight/simple | 1.50 | beauty_personal_care, health_wellness, jewelry_accessories, food_beverage |
+| standard | 2.50 | home_garden, pets, toys_kids, electronics_gadgets, other |
+| bulky/fragile | 4.00 | sports_outdoors, fashion_apparel |
+
+**Support Cost Per Order** — By platform:
+
+| Platform      | $/order |
+|--------------|---------|
+| dtc_website   | 1.50    |
+| amazon        | 0.50    |
+| etsy          | 1.00    |
+| multi_channel | 1.75    |
+
 **Repeat Purchase** — By expectation:
 
 | Expectation | Rate | Frequency |
 |------------|------|-----------|
-| none       | 0.00 | 1.5       |
+| none       | 0.00 | 1.0       |
 | low        | 0.10 | 1.5       |
 | medium     | 0.25 | 2.5       |
 | high       | 0.40 | 4.0       |
@@ -206,7 +224,7 @@ traffic_total_year1 = round(total_orders_year1_target / weighted_conv)
 
 **CPC:** `cpc_year1 = cac_paid_target × conv_paid`
 
-**CPC Inflation** by ambition: conservative=0.075, base=0.10, aggressive=0.125
+**CPC Inflation** by ambition: conservative=0.06, base=0.08, aggressive=0.12
 
 **Traffic YoY Growth** by ambition (use mid-point): conservative=0.10, base=0.225, aggressive=0.45
 
@@ -230,6 +248,23 @@ Ensure misc_ga_year1 does not go negative. If it would, set misc_ga_year1 = 0.
 
 **Overhead Inflation** — Map band: flat=0.00, 3_5=0.04, 5_10=0.075
 
+**Warehouse Rent** — By team size and inventory:
+
+| Condition | Annual ($) |
+|-----------|-----------|
+| no_stock (dropship/POD) | 0 |
+| 0_1 team + 1_2_months inventory | 0 |
+| 2_3 team OR 3_plus_months inventory | 12,000 |
+| 4_7 team | 24,000 |
+| 8_plus team | 42,000 |
+
+**Office Rent** — Pre-launch ecommerce works remotely:
+
+| Condition | Annual ($) |
+|-----------|-----------|
+| team_size_bucket < 8_plus | 0 |
+| team_size_bucket = 8_plus | 18,000 |
+
 **Rent Start Years** — If rent amount = 0, default to 2026. Otherwise:
 - Conservative: start year = 2028 (2-year delay)
 - Aggressive with heavy inventory: start year = 2027 (1-year delay)
@@ -237,7 +272,7 @@ Ensure misc_ga_year1 does not go negative. If it would, set misc_ga_year1 = 0.
 - Base: start year = 2027 (1-year delay)
 - Cap at 2031.
 
-**Rent/Ship Inflation Defaults:** rent_inflation=0.03, ship_inflation=0.05, aov_inflation=0.025
+**Rent/Ship Inflation Defaults:** rent_inflation=0.03, ship_inflation=0.06, aov_inflation=0.025
 
 ### Step 10: Resolve Working Capital
 
@@ -262,7 +297,7 @@ Ensure misc_ga_year1 does not go negative. If it would, set misc_ga_year1 = 0.
 **Loan Interest Rate** — Map band: 5_8=0.065, 8_12=0.10, gt_12=0.14
 **Loan Term:** Use user's value (default 5 years if not specified)
 
-**Tax Rate** by region: US=0.25, UK=0.19, EU=0.22, CA=0.26, AU=0.30, other=0.25
+**Tax Rate** by region (aligned with regional_defaults.json): US=0.26, UK=0.19, EU=0.213, CA=0.122, AU=0.25, other=0.25
 
 **Equity** — If `equity_mode = explicit`: use user's stated amount.
 If `equity_mode = suggest`: calculate using the equity suggestion algorithm:
@@ -318,7 +353,25 @@ Source values: `user_explicit`, `user_band_inferred`, `category_benchmark`, `res
   "gross_margin_target_pct": 0.50,
   "fulfilment_mode_year1_resolved": "self_fulfill",
   "cac_paid_target": 20.0,
-  "other_fixed_costs_year1_total": 18000
+  "other_fixed_costs_year1_total": 18000,
+  "equity_mode": "suggest",
+  "equity_suggestion": {
+    "annual_fixed": 233125,
+    "annual_variable": 71712,
+    "effective_annual_burn": 276152,
+    "monthly_burn": 23013,
+    "runway_months": 12,
+    "buffer_multiplier": 1.15,
+    "loan_offset": 0,
+    "initial_estimate": 318000
+  }
+}
+```
+
+When `equity_mode = "explicit"`, omit the `equity_suggestion` object and record just the mode:
+```json
+{
+  "equity_mode": "explicit"
 }
 ```
 

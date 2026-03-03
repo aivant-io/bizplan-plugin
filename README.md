@@ -52,13 +52,13 @@ claude plugin install github:<your-github-username>/bizplan-plugin/bizplan-ecomm
 
 Claude will walk you through the intake questionnaire and generate:
 1. **Excel financial model** (.xlsx) - 6-year forecast with three financial statements
-2. **Business plan** (.md) - Professional narrative with market analysis and citations
+2. **Business plan** (.md + .docx) - Professional narrative with market analysis and citations
 
 ## Requirements
 
 - **Claude Pro, Max, Team, or Enterprise** subscription
 - **Python 3.11+** (for Excel generation)
-- **openpyxl** and **xlcalculator** (auto-installed via requirements.txt)
+- **openpyxl**, **xlcalculator**, and **python-docx** (auto-installed via requirements.txt)
 - **Pandoc** (optional, for DOCX export)
 
 ## Roadmap
@@ -69,7 +69,6 @@ Claude will walk you through the intake questionnaire and generate:
 | SaaS | Planned |
 | Marketplace | Planned |
 | Services / Agency | Planned |
-| D2C CPG | Planned |
 
 ## License
 

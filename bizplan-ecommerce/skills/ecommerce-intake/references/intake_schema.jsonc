@@ -1,7 +1,11 @@
 {
     "business_profile": {
       "store_name": "GlowHaus",
-      "description": "Clean skincare products for women in their 20s–30s",
+      "description": "Clean skincare products for women in their 20s-30s who want transparent ingredients and no synthetic fragrances",
+      "target_customer": "Health-conscious women aged 24-35 who read ingredient labels, follow clean beauty influencers, and are willing to pay a premium for transparency",  // Q2a: nullable — null if founder unsure
+      "differentiation": "Every product has a publicly available third-party lab report and we use only fermented botanical ingredients",  // Q2b: nullable — null if founder unsure
+      "founder_background": "Licensed esthetician with 5 years in a dermatology clinic and 12k Instagram followers who ask for product recommendations",  // Q2c: nullable — null if no relevant background
+      "why_now": "Clean beauty growing 15% annually and major retailers expanding shelf space, but most brands still don't publish lab results — transparency is becoming a dealbreaker",  // Q2d: nullable — null if founder unsure
       "category": "beauty_personal_care",        // from Q3; enum of your category list
       "customer_region": "US",                   // from Q4 (where customers are)
       "tax_country": "US"                        // Q4 override, or same as customer_region
@@ -72,8 +76,8 @@
     },
   
     "funding_tax": {
-      "equity_mode": "explicit",                // Q20: explicit | suggest
-      "equity_injection": 80000,                // Q20a: if explicit
+      "equity_mode": "suggest",                 // Q20: explicit | suggest
+      "equity_injection": null,                 // Q20a: if explicit
   
       "loan_plan": "none",                      // Q21: none | term_loan
       "loan_amount": null,                      // Q21a: if term_loan

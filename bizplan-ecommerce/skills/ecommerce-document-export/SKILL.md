@@ -69,6 +69,10 @@ The business plan writer produces `## 1. Executive Summary` (H2 with numbers). T
 
 Convert `[N]` bracket citations to Pandoc superscript syntax `^[N]^`. Only matches 1-3 digit numbers. Avoids markdown links `[text](url)`.
 
+### Step 3b: Convert Bracketed URLs to Clickable Links
+
+Convert plain-text URLs in brackets `[https://...]` to proper markdown links `[url](url)` so Pandoc renders them as blue, clickable hyperlinks in the DOCX output.
+
 ### Step 4: Ensure Blank Lines Before Lists
 
 Pandoc requires a blank line before bulleted/numbered lists. The script inserts them automatically.
@@ -100,14 +104,14 @@ The reference.docx defines the professional styling applied by Pandoc:
 
 | Style | Font | Size | Color | Notes |
 |-------|------|------|-------|-------|
-| Title | Calibri | 44pt Bold | #1A365D (navy) | Cover page business name |
-| Subtitle | Calibri | 24pt Italic | #2E5C8A (blue) | Cover page subtitle |
-| Date | Calibri | 14pt | #333333 (gray) | Cover page date |
-| Heading 1 | Calibri | 24pt Bold | #1A365D (navy) | `page_break_before=True` |
-| Heading 2 | Calibri | 18pt Bold | #2E5C8A (blue) | Subsection headings |
-| Heading 3 | Calibri | 14pt Bold | #3D85C6 (light blue) | Minor headings |
-| Heading 4 | Calibri | 12pt Bold Italic | #333333 (gray) | Detail headings |
-| Body | Calibri | 11pt | #333333 (gray) | 1.15 line spacing |
+| Title | Times New Roman | 44pt Bold | #1A365D (navy) | Cover page business name |
+| Subtitle | Times New Roman | 24pt Italic | #2E5C8A (blue) | Cover page subtitle |
+| Date | Times New Roman | 14pt | #333333 (gray) | Cover page date |
+| Heading 1 | Times New Roman | 24pt Bold | #1A365D (navy) | `page_break_before=True` |
+| Heading 2 | Times New Roman | 18pt Bold | #2E5C8A (blue) | Subsection headings |
+| Heading 3 | Times New Roman | 14pt Bold | #3D85C6 (light blue) | Minor headings |
+| Heading 4 | Times New Roman | 12pt Bold Italic | #333333 (gray) | Detail headings |
+| Body | Times New Roman | 11pt | #333333 (gray) | 1.15 line spacing |
 | Hyperlink | — | — | #0563C1 (blue) | Underlined |
 
 **Margins:** 1 inch all sides. **Page size:** 8.5" x 11" (US Letter).

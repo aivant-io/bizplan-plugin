@@ -25,8 +25,67 @@ The goal is: **minimal but high‑leverage inputs**, optimized for early‑stage
 
 - **Type:** Short paragraph input
 - **Prompt:** `In one or two sentences, what are you selling and who is it for?`
+- **Motivation text:** `This is the foundation of your entire business plan. A specific answer helps us write a much sharper plan.`
+- **Example:** `Freeze-dried dog treats made from single-ingredient, human-grade meat for health-conscious pet owners who read ingredient labels.`
 - **Branching:** None
 - **Usage:** Core context for the business plan narrative and for the deep‑research agent (to infer category nuances).
+- **Stored as:** `business_profile.description` (string)
+
+---
+
+**Q2a – Target customer**
+
+- **Type:** Short paragraph (1-3 sentences)
+- **Prompt:** `Describe your ideal customer — who are they, and what problem or desire does your product solve for them?`
+- **Motivation text:** `Your business plan needs a clear picture of who you are selling to. This shapes everything from marketing strategy to pricing.`
+- **Examples:**
+  - `Millennial moms (ages 28-38) who want clean, organic baby skincare but are overwhelmed by options and don't trust big brands.`
+  - `Male remote workers aged 25-40 who sit at a desk 8+ hours and want affordable ergonomic accessories that don't look like medical equipment.`
+- **Branching:** If founder says "I'm not sure" → store as `null` and reassure: "No problem — we'll build a customer profile from market research."
+- **Usage:** Feeds the Business Overview target customer persona paragraph and shapes market research queries.
+- **Stored as:** `business_profile.target_customer` (string | null)
+
+---
+
+**Q2b – Competitive differentiation**
+
+- **Type:** Short paragraph (1-3 sentences)
+- **Prompt:** `What makes your products different from what customers can already buy? This could be ingredients, design, price, sourcing, experience, or anything else.`
+- **Motivation text:** `We use this to position your business against competitors in the plan. Even small differences matter.`
+- **Examples:**
+  - `We source high-end fabrics from Italian mills but sell direct-to-consumer, so we can offer $200 quality at $80 price points.`
+  - `Most competitors sell generic formulas. We use clinically tested fermented ingredients and publish our lab results on every product page.`
+- **Branching:** If founder says "I'm not sure" → store as `null` and reassure: "No problem — we'll identify positioning opportunities from market research."
+- **Usage:** Anchors the competitive positioning paragraphs in Business Overview and Market Opportunity sections.
+- **Stored as:** `business_profile.differentiation` (string | null)
+
+---
+
+**Q2c – Founder background**
+
+- **Type:** Short paragraph (1-3 sentences)
+- **Prompt:** `What relevant experience or connections do you bring to this business? This could be industry experience, a professional skill, an existing audience, supplier relationships, or personal passion.`
+- **Motivation text:** `Your background is part of your competitive advantage. The plan will explain why you are the right person to build this business.`
+- **Examples:**
+  - `I spent 6 years as a buyer for Nordstrom in the accessories category, so I have deep supplier relationships and know what sells.`
+  - `I'm a licensed esthetician with 12k Instagram followers who already ask me for product recommendations.`
+- **Branching:** If founder says "I don't have industry experience" or similar → store as `null` and reassure: "That's completely fine — many successful founders start fresh. We'll focus on other strengths."
+- **Usage:** Feeds the Business Overview founder/team paragraph. If null, paragraph is omitted entirely.
+- **Stored as:** `business_profile.founder_background` (string | null)
+
+---
+
+**Q2d – Why now**
+
+- **Type:** Short paragraph (1-3 sentences)
+- **Prompt:** `Why is now a good time to launch this business? Think about trends, changes in consumer behavior, new technology, or gaps you've noticed in the market.`
+- **Motivation text:** `Timing matters. Even a quick observation about a trend you've noticed helps the plan explain why this business makes sense right now.`
+- **Examples:**
+  - `The clean beauty market is growing 15% year-over-year and big retailers like Target are expanding their clean beauty shelf space.`
+  - `Remote work has become permanent for millions of people, and most home office furniture is either ugly or expensive — there's a huge gap in the $50-$150 range.`
+- **Branching:** If founder says "I'm not sure" → store as `null` and reassure: "No problem — our market research will identify relevant trends for your category."
+- **Usage:** Anchors the "Why now" paragraph in Business Overview and supports the Market Opportunity narrative.
+- **Stored as:** `business_profile.why_now` (string | null)
 
 ---
 

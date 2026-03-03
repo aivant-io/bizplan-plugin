@@ -15,9 +15,22 @@ from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
+from docx.oxml import OxmlElement, parse_xml
+from docx.oxml.ns import nsdecls, qn
 from docx.shared import Inches, Pt, RGBColor
+
+
+def _override_theme_font(style, font_name: str):
+    """Force a style's font, overriding Word theme fonts via XML."""
+    rPr = style._element.get_or_add_rPr()
+    existing = rPr.find(qn('w:rFonts'))
+    if existing is not None:
+        rPr.remove(existing)
+    rFonts = parse_xml(
+        f'<w:rFonts {nsdecls("w")} '
+        f'w:ascii="{font_name}" w:hAnsi="{font_name}" w:cs="{font_name}"/>'
+    )
+    rPr.append(rFonts)
 
 
 def _add_hyperlink(paragraph, url: str, text: str):
@@ -65,7 +78,7 @@ def create_reference_document(output_path: Path) -> None:
 
     # Heading 1 — Main sections, page break before
     h1 = doc.styles["Heading 1"]
-    h1.font.name = "Calibri"
+    h1.font.name = "Times New Roman"
     h1.font.size = Pt(24)
     h1.font.bold = True
     h1.font.color.rgb = PRIMARY
@@ -73,30 +86,33 @@ def create_reference_document(output_path: Path) -> None:
     h1.paragraph_format.space_after = Pt(12)
     h1.paragraph_format.keep_with_next = True
     h1.paragraph_format.page_break_before = True
+    _override_theme_font(h1, "Times New Roman")
 
     # Heading 2 — Subsections
     h2 = doc.styles["Heading 2"]
-    h2.font.name = "Calibri"
+    h2.font.name = "Times New Roman"
     h2.font.size = Pt(18)
     h2.font.bold = True
     h2.font.color.rgb = SECONDARY
     h2.paragraph_format.space_before = Pt(18)
     h2.paragraph_format.space_after = Pt(8)
     h2.paragraph_format.keep_with_next = True
+    _override_theme_font(h2, "Times New Roman")
 
     # Heading 3 — Minor headings
     h3 = doc.styles["Heading 3"]
-    h3.font.name = "Calibri"
+    h3.font.name = "Times New Roman"
     h3.font.size = Pt(14)
     h3.font.bold = True
     h3.font.color.rgb = ACCENT
     h3.paragraph_format.space_before = Pt(12)
     h3.paragraph_format.space_after = Pt(6)
     h3.paragraph_format.keep_with_next = True
+    _override_theme_font(h3, "Times New Roman")
 
     # Heading 4 — Detail headings
     h4 = doc.styles["Heading 4"]
-    h4.font.name = "Calibri"
+    h4.font.name = "Times New Roman"
     h4.font.size = Pt(12)
     h4.font.bold = True
     h4.font.italic = True
@@ -104,10 +120,11 @@ def create_reference_document(output_path: Path) -> None:
     h4.paragraph_format.space_before = Pt(10)
     h4.paragraph_format.space_after = Pt(4)
     h4.paragraph_format.keep_with_next = True
+    _override_theme_font(h4, "Times New Roman")
 
     # Normal — Body text
     normal = doc.styles["Normal"]
-    normal.font.name = "Calibri"
+    normal.font.name = "Times New Roman"
     normal.font.size = Pt(11)
     normal.font.color.rgb = TEXT
     normal.paragraph_format.space_after = Pt(8)
@@ -115,40 +132,44 @@ def create_reference_document(output_path: Path) -> None:
 
     # Title — Cover page business name
     title = doc.styles["Title"]
-    title.font.name = "Calibri"
+    title.font.name = "Times New Roman"
     title.font.size = Pt(44)
     title.font.bold = True
     title.font.color.rgb = PRIMARY
     title.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title.paragraph_format.space_after = Pt(12)
+    _override_theme_font(title, "Times New Roman")
 
     # Subtitle — Cover page "Business Plan"
     subtitle = doc.styles["Subtitle"]
-    subtitle.font.name = "Calibri"
+    subtitle.font.name = "Times New Roman"
     subtitle.font.size = Pt(24)
     subtitle.font.bold = False
     subtitle.font.italic = True
     subtitle.font.color.rgb = SECONDARY
     subtitle.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
     subtitle.paragraph_format.space_after = Pt(6)
+    _override_theme_font(subtitle, "Times New Roman")
 
     # Date — Cover page date
     try:
         date_style = doc.styles.add_style("Date", WD_STYLE_TYPE.PARAGRAPH)
     except ValueError:
         date_style = doc.styles["Date"]
-    date_style.font.name = "Calibri"
+    date_style.font.name = "Times New Roman"
     date_style.font.size = Pt(14)
     date_style.font.color.rgb = TEXT
     date_style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    _override_theme_font(date_style, "Times New Roman")
 
     # TOC Heading
     if "TOC Heading" in doc.styles:
         toc = doc.styles["TOC Heading"]
-        toc.font.name = "Calibri"
+        toc.font.name = "Times New Roman"
         toc.font.size = Pt(16)
         toc.font.bold = True
         toc.font.color.rgb = PRIMARY
+        _override_theme_font(toc, "Times New Roman")
 
     # Hyperlink
     try:
@@ -163,13 +184,14 @@ def create_reference_document(output_path: Path) -> None:
         bq = doc.styles.add_style("Block Quote", WD_STYLE_TYPE.PARAGRAPH)
     except ValueError:
         bq = doc.styles["Block Quote"]
-    bq.font.name = "Calibri"
+    bq.font.name = "Times New Roman"
     bq.font.size = Pt(11)
     bq.font.italic = True
     bq.font.color.rgb = MUTED
     bq.paragraph_format.left_indent = Inches(0.5)
     bq.paragraph_format.space_before = Pt(6)
     bq.paragraph_format.space_after = Pt(6)
+    _override_theme_font(bq, "Times New Roman")
 
     # ---- Sample content so Pandoc learns all styles ----
     doc.add_paragraph("Business Plan", style="Title")

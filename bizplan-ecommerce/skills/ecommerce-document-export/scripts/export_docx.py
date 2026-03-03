@@ -9,12 +9,14 @@ Preprocessing pipeline:
     1. Strip existing document header (replaced by YAML front matter)
     2. Promote headings (## N. Section → # Section for page breaks)
     3. Convert [N] citations to superscript ^[N]^
+    3b. Convert [https://...] to [url](url) for clickable hyperlinks
     4. Ensure blank lines before lists (Pandoc requirement)
     5. Remove horizontal rules (--- separators)
     6. Generate YAML front matter with cover page and TOC
 
 Post-processing:
     7. Style cover page (center, spacing) via python-docx
+    8. Add visible borders to all tables via python-docx
 
 Requires: pandoc, python-docx>=1.1.0
 """
@@ -101,6 +103,11 @@ def convert_citations_to_superscript(md: str) -> str:
     and 4-digit years like [2032].
     """
     return re.sub(r'\[(\d{1,3})\](?!\()', r'^\\[\1\\]^', md)
+
+
+def convert_urls_to_links(md: str) -> str:
+    """Convert [https://...] to [url](url) for Pandoc hyperlink generation."""
+    return re.sub(r'\[(https?://[^\]]+)\](?!\()', r'[\1](\1)', md)
 
 
 def ensure_blank_lines_before_lists(md: str) -> str:
@@ -192,6 +199,33 @@ def style_cover_page(docx_path: Path) -> None:
     doc.save(docx_path)
 
 
+def style_tables(docx_path: Path) -> None:
+    """Post-process tables to add visible cell borders."""
+    from docx import Document
+    from docx.oxml import parse_xml
+    from docx.oxml.ns import nsdecls, qn
+
+    doc = Document(docx_path)
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                tc = cell._tc
+                tcPr = tc.get_or_add_tcPr()
+                existing = tcPr.find(qn('w:tcBorders'))
+                if existing is not None:
+                    tcPr.remove(existing)
+                tcBorders = parse_xml(
+                    f'<w:tcBorders {nsdecls("w")}>'
+                    '  <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+                    '  <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+                    '  <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+                    '  <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+                    '</w:tcBorders>'
+                )
+                tcPr.append(tcBorders)
+    doc.save(docx_path)
+
+
 # ============================================================================
 # Core Conversion
 # ============================================================================
@@ -228,6 +262,9 @@ def convert_markdown_to_docx(
     # 3. Convert citations
     md_content = convert_citations_to_superscript(md_content)
 
+    # 3b. Convert bracketed URLs to clickable links
+    md_content = convert_urls_to_links(md_content)
+
     # 4. Ensure blank lines before lists
     md_content = ensure_blank_lines_before_lists(md_content)
 
@@ -260,8 +297,9 @@ def convert_markdown_to_docx(
             print(f"Pandoc error: {result.stderr}", file=sys.stderr)
             sys.exit(1)
 
-        # 7. Post-process cover page
+        # 7. Post-process cover page and tables
         style_cover_page(output_path)
+        style_tables(output_path)
 
         return {
             "output_path": str(output_path),

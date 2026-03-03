@@ -345,6 +345,44 @@ The final output includes:
   "validation": {
     "balance_check_passed": true,
     "inputs_written": 49
+  },
+  "equity_audit": {
+    "mode": "suggest",
+    "initial_estimate": 318000,
+    "iterations": [
+      {"iteration": 1, "equity_tested": 318000, "min_cash": -1176265, "min_cash_year": 2031, "result": "deficit"},
+      {"iteration": 2, "equity_tested": 1672000, "min_cash": 177735, "min_cash_year": 2031, "result": "converged"}
+    ],
+    "final_equity": 1672000,
+    "converged": true,
+    "total_iterations": 2,
+    "final_min_cash": 177735,
+    "final_min_cash_year": 2031
+  }
+}
+```
+
+**`equity_audit` fields:**
+- `mode`: `"suggest"` or `"explicit"` — from intake `equity_mode`
+- `initial_estimate`: Starting equity from assumptions Step 12 (suggest mode) or user's amount (explicit mode)
+- `iterations`: Array of each optimization loop pass — equity tested, resulting min cash, which year, and outcome
+- `final_equity`: The value written to cell B76
+- `converged`: `true` if min_cash >= $1,000; `false` if max iterations reached; `null` for explicit mode
+- `total_iterations`: Number of optimization passes (0 for explicit mode)
+- `final_min_cash` / `final_min_cash_year`: Lowest closing cash and when it occurs
+
+For explicit mode, the audit captures the user's amount and the resulting cash position without iteration:
+```json
+{
+  "equity_audit": {
+    "mode": "explicit",
+    "initial_estimate": 80000,
+    "iterations": [],
+    "final_equity": 80000,
+    "converged": null,
+    "total_iterations": 0,
+    "final_min_cash": -1176265,
+    "final_min_cash_year": 2031
   }
 }
 ```
