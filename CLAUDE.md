@@ -9,21 +9,49 @@ Claude plugin marketplace containing business plan and financial model generator
 ## Dependencies
 
 - Python 3.11+
-- `openpyxl>=3.1.2` and `xlcalculator>=0.5.0` (see `bizplan-ecommerce/skills/ecommerce-financial-model/requirements.txt`)
+- `openpyxl>=3.1.2` and `xlcalculator>=0.5.0` (financial model — `bizplan-ecommerce/skills/ecommerce-financial-model/requirements.txt`)
+- `python-docx>=1.1.0` (DOCX post-processing — `bizplan-ecommerce/skills/ecommerce-document-export/requirements.txt`)
 - Pandoc (optional, for DOCX export; falls back to markdown delivery)
 
 ## Commands
 
 - `/bizplan` — Full 5-stage pipeline: intake → assumptions → Excel model → business plan → DOCX export
 - `/financial-model` — Stages 1-3 only (intake → assumptions → Excel model)
-- `/business-plan` — Narrative plan only (from existing model or from scratch)
+- `/business-plan` — Narrative plan only (from existing model or from scratch via full pipeline)
 
-### Validation
+### Scripts
 
 ```bash
+# Validate a populated model (49 inputs, balance sheet, traffic mix, conversion hierarchy)
 python bizplan-ecommerce/skills/ecommerce-financial-model/scripts/validate_model.py <path_to_model.xlsx>
+
+# Convert markdown business plan to styled DOCX
+python bizplan-ecommerce/skills/ecommerce-document-export/scripts/export_docx.py <input.md> <output.docx> --title "StoreName" [--date "March 2026"]
+
+# Regenerate the Pandoc reference.docx template
+python bizplan-ecommerce/skills/ecommerce-document-export/scripts/create_reference_doc.py
 ```
-Checks: all 49 inputs populated, type correctness, balance sheet balances, traffic mix sums to 1.0, conversion hierarchy (retention ≥ organic ≥ paid).
+
+## Plugin Structure
+
+Each vertical plugin follows the same layout:
+```
+bizplan-{vertical}/
+├── .claude-plugin/plugin.json     # Plugin metadata
+├── commands/                      # User-facing slash commands (markdown)
+├── hooks/hooks.json               # Event hooks (currently empty)
+└── skills/                        # Sequential skill processors
+    └── {skill-name}/
+        ├── SKILL.md               # Full skill instructions
+        ├── TROUBLESHOOTING.md     # Known issues (assumptions, financial-model)
+        ├── references/            # Schemas and maps (JSONC)
+        ├── templates/             # Excel/DOCX templates
+        ├── scripts/               # Python scripts
+        ├── data/                  # Curated benchmark data
+        └── requirements.txt       # Python dependencies
+```
+
+Output files are named `{StoreName}_Financial_Model.xlsx`, `{StoreName}_Business_Plan.md/.docx`, `{StoreName}_model_outputs.json`.
 
 ## Pipeline Architecture (Ecommerce)
 
@@ -35,21 +63,34 @@ The ecommerce vertical runs 5 sequential skills, each consuming the prior stage'
 4. **ecommerce-business-plan** — 3-stage writer: market research (curated benchmarks + structured web search across 4 research areas), narrative (5,500-7,000 words, 7 sections), citation verification → markdown
 5. **ecommerce-document-export** — Pandoc conversion with `reference.docx` template → `.docx`
 
+### Key Schema Files (source of truth — never guess values)
+
+| Schema | Location | Purpose |
+|--------|----------|---------|
+| `intake_schema.jsonc` | `ecommerce-intake/references/` | Questionnaire data structure, enums, validation rules |
+| `driver_catalog.jsonc` | `ecommerce-assumptions/references/` | All 49 driver IDs, types, bounds (master reference) |
+| `input_map.jsonc` | `ecommerce-financial-model/references/` | 49 driver → Excel cell address mappings (Assumptions sheet, column B, B5-B79) |
+| `output_map.jsonc` | `ecommerce-financial-model/references/` | Model sheet output addresses (columns E-J for 2026-2031) |
+
 ## Critical Technical Rules
 
 ### Excel Writer — Use XML Editing, NOT openpyxl.save()
 openpyxl's save corrupts charts and conditional formatting. Instead:
 1. Open `.xlsx` as ZIP archive
 2. Replace cell `<v>` tags via regex in sheet XML
-3. Remove ALL cached `<v>` tags from formula cells (forces recalculation)
-4. Delete `xl/calcChain.xml` (forces Excel to rebuild calculation chain)
-5. Write back to ZIP with `ZIP_DEFLATED` compression
+3. Remove ALL cached `<v>` tags from formula cells across ALL sheets (forces recalculation)
+4. Delete `xl/calcChain.xml` AND remove its entry from `[Content_Types].xml`
+5. Set `fullCalcOnLoad="1"` on `<calcPr>` in `workbook.xml`
+6. Write back to ZIP with `ZIP_DEFLATED` compression
 
 ### xlcalculator Workaround
 Create aliases for all reference variants (`$D$9`, `D$9`, `$D9`, `D9`) when setting input values — xlcalculator doesn't normalize reference styles.
 
 ### Equity Optimization Loop
-When equity mode is SUGGEST, iterate up to 5 times: if `min_cash < $1,000`, set `new_equity = current_equity + abs(min_cash) + $1,000) × 1.15`, round to nearest $1,000, re-run full Excel write cycle.
+When equity mode is SUGGEST, iterate up to 5 times: if `min_cash < $1,000`, set `new_equity = (current_equity + abs(min_cash) + $1,000) × 1.15`, round to nearest $1,000, re-run full Excel write cycle. Output includes `equity_audit` with iteration history.
+
+### DOCX Export Preprocessing
+Before Pandoc conversion, the markdown is preprocessed: heading promotion (`## N. Section` → `# Section`), citation conversion (`[N]` → `^[N]^`), URL linking, horizontal rule removal, YAML front matter + static TOC insertion. After Pandoc, python-docx styles the cover page and adds table borders.
 
 ## Key Conventions
 
@@ -57,19 +98,22 @@ When equity mode is SUGGEST, iterate up to 5 times: if `min_cash < $1,000`, set 
 - Currency values are plain numbers (50000, NOT "$50,000")
 - Year drivers are calendar years 2026-2031 (NOT "Year 1-6")
 - Forecast period is always 6 years
-- All 49 drivers defined in `driver_catalog.jsonc` — source of truth for IDs, types, bounds
-- All 49 cell addresses defined in `input_map.jsonc` — never guess cells (all on Assumptions sheet, column B, rows B5-B79)
-- Model outputs extracted per `output_map.jsonc` (Model sheet, columns E-J for years 2026-2031)
+- B73 (`loan_start_year`) is hardcoded to 2026 in the template — do NOT write it
+- Business plan uses first-person plural ("we", "our") and pre-launch tense
+- Business plan citations: CITE external market data, DO NOT CITE internal model projections
+- Nullable intake fields (`target_customer`, `differentiation`, `founder_background`, `why_now`) — use `null` if founder was unsure; never fabricate qualitative context
 
 ## Data Layer
 
 - 11 product categories with curated benchmarks: `bizplan-ecommerce/skills/ecommerce-assumptions/data/us/`
-- Each category file has conversion rates, return rates, methodology, confidence scores, and source citations
+  - beauty_personal_care, baby_kids, electronics_gadgets, fashion_apparel, food_beverage, health_wellness, home_living, jewelry_accessories, other, pet_supplies, sports_outdoors
+- Each category file has conversion rates (paid/organic/retention), CAC, AOV, margins, return rates, methodology, confidence scores, and source citations
 - `global_defaults.json` — inflation rates (CPC 6%, shipping 6%, rent 3%)
-- `regional_defaults.json` — region-specific settings
+- `regional_defaults.json` — 5 regions: US, UK, EU, Canada, Australia (tax rates, region-specific settings)
 
 ## Adding a New Vertical
 
 1. Copy `bizplan-ecommerce/` as a starting point
-2. Modify all skills, schemas, templates, and benchmark data for the new domain
-3. Register in `.claude-plugin/marketplace.json`
+2. Modify all 5 skills (SKILL.md), schemas, templates, and benchmark data for the new domain
+3. Update commands in `commands/` for the new pipeline
+4. Register the new plugin in `.claude-plugin/marketplace.json`
