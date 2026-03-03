@@ -29,12 +29,11 @@ Generate professional ecommerce business plans and 6-year financial models.
 ### Claude Code (CLI)
 
 ```bash
-# Install from marketplace
-claude plugin marketplace add <your-github-username>/bizplan-plugin
-claude plugin install bizplan-ecommerce@bizplan-plugins
+# Add the marketplace
+/plugin marketplace add aivant-io/bizplan-plugin
 
-# Or install directly from GitHub
-claude plugin install github:<your-github-username>/bizplan-plugin/bizplan-ecommerce
+# Install the ecommerce plugin
+/plugin install bizplan-ecommerce@aivant-io-bizplan-plugin
 ```
 
 ### Claude Cowork (Desktop)
