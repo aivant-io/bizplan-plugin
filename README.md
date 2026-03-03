@@ -38,10 +38,11 @@ Generate professional ecommerce business plans and 6-year financial models.
 
 ### Claude Cowork (Desktop)
 
-1. Open Claude Desktop
-2. Go to Customize > Plugins
-3. Search for "bizplan-ecommerce"
-4. Click Install
+1. Open Claude Desktop and go to the **Cowork** tab
+2. Click **Customize** in the left sidebar
+3. Click **+** → **Add marketplace from GitHub**
+4. Enter: `https://github.com/aivant-io/bizplan-plugin`
+5. Install **bizplan-ecommerce** from the added marketplace
 
 ## Usage
 
