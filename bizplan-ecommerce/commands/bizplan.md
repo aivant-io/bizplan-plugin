@@ -4,37 +4,41 @@ Generate a complete ecommerce business plan and 6-year financial model from scra
 
 ## Pipeline
 
-Run all 5 skills in sequence. Each step depends on the output of the previous step.
+Run all 5 skills in sequence. Each step depends on the output of the previous step. **Steps 2-5 run in isolated subagent contexts** (`context: fork`) — they read inputs from disk and write outputs to disk. Step 1 runs inline because it requires user interaction.
 
-### Step 1: Intake Questionnaire
+### Step 1: Intake Questionnaire (inline)
 Use skill: `ecommerce-intake`
 
 Walk the founder through the structured questionnaire (8 sections, ~22 questions with conditional branching). Collect all inputs and produce the intake JSON.
 
-### Step 2: Resolve Assumptions
-Use skill: `ecommerce-assumptions`
+After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name` in the intake output — this store name is passed as the argument to all subsequent skills.
 
-Take the intake JSON and resolve all 49 financial model drivers using mapping tables, curated benchmarks, and calculation formulas. Produce the resolved assumptions JSON.
+### Step 2: Resolve Assumptions (forked subagent)
+Use skill: `ecommerce-assumptions` with the store name as the argument.
 
-### Step 3: Populate Financial Model
-Use skill: `ecommerce-financial-model`
+This skill runs in an isolated context. It reads `{StoreName}_intake.json` from disk, resolves all 49 financial model drivers using mapping tables, curated benchmarks, and calculation formulas, and writes `{StoreName}_assumptions.json` to disk.
 
-Write the 49 resolved driver values to the Excel template via direct XML editing. Recalculate formulas with xlcalculator. Run equity optimization if needed (suggest mode: iterate to positive cash; explicit mode: generate warning). Extract model outputs.
+### Step 3: Populate Financial Model (forked subagent)
+Use skill: `ecommerce-financial-model` with the store name as the argument.
+
+This skill runs in an isolated context. It reads `{StoreName}_assumptions.json` from disk, populates the Excel template via direct XML editing, recalculates formulas with xlcalculator, runs equity optimization if needed, and writes:
+- `{StoreName}_Financial_Model.xlsx`
+- `{StoreName}_model_outputs.json`
 
 **Install dependencies first:**
 ```bash
 pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
 ```
 
-### Step 4: Write Business Plan
-Use skill: `ecommerce-business-plan`
+### Step 4: Write Business Plan (forked subagent)
+Use skill: `ecommerce-business-plan` with the store name as the argument.
 
-Generate a 5,500-7,000 word business plan with 7 required sections. Perform structured market research (curated category benchmarks, then web search for market sizing, consumer trends, competitive landscape, and category-specific factors), write the narrative with bracket citations, and verify all citations mechanically. Include equity warning if applicable.
+This skill runs in an isolated context with a clean context window — no accumulated conversation history from prior steps. It reads all three JSON files from disk (`{StoreName}_intake.json`, `{StoreName}_assumptions.json`, `{StoreName}_model_outputs.json`), performs structured market research (curated benchmarks + web search), writes the narrative with bracket citations, verifies citations, and saves `{StoreName}_Business_Plan.md`.
 
-### Step 5: Export to DOCX (Optional)
-Use skill: `ecommerce-document-export`
+### Step 5: Export to DOCX (forked subagent, optional)
+Use skill: `ecommerce-document-export` with the store name as the argument.
 
-Convert the markdown business plan to a styled Word document using Pandoc and the reference.docx template. Skip this step if Pandoc is not installed — deliver markdown instead.
+This skill runs in an isolated context. It reads `{StoreName}_Business_Plan.md`, converts to styled Word document using Pandoc and the reference.docx template, and writes `{StoreName}_Business_Plan.docx`. Skip if Pandoc is not installed — deliver markdown instead.
 
 ## Deliverables
 
@@ -51,5 +55,9 @@ Convert the markdown business plan to a styled Word document using Pandoc and th
 ## Output Location
 
 Save all output files to the current working directory:
+- `{StoreName}_intake.json`
+- `{StoreName}_assumptions.json`
 - `{StoreName}_Financial_Model.xlsx`
-- `{StoreName}_Business_Plan.docx` (or `.md`)
+- `{StoreName}_model_outputs.json`
+- `{StoreName}_Business_Plan.md`
+- `{StoreName}_Business_Plan.docx`

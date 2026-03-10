@@ -10,30 +10,37 @@ If the user provides an existing populated Excel model (.xlsx):
 
 1. Extract model outputs from the Excel file using `references/output_map.jsonc` cell addresses
 2. Ask the user for any missing intake context (business name, category, region, channels)
-3. Skip to Step 4 below
+3. Save the intake data to `{StoreName}_intake.json` and model outputs to `{StoreName}_model_outputs.json`
+4. Skip to Step 4 below
 
 ### Mode B: From Scratch
 
 If no existing model is provided, run the full pipeline:
 
-### Step 1: Intake Questionnaire
+### Step 1: Intake Questionnaire (inline)
 Use skill: `ecommerce-intake`
 
-### Step 2: Resolve Assumptions
-Use skill: `ecommerce-assumptions`
+After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name`.
 
-### Step 3: Populate Financial Model
-Use skill: `ecommerce-financial-model`
+### Step 2: Resolve Assumptions (forked subagent)
+Use skill: `ecommerce-assumptions` with the store name as the argument.
 
-### Step 4: Write Business Plan
-Use skill: `ecommerce-business-plan`
+Reads `{StoreName}_intake.json`, writes `{StoreName}_assumptions.json`.
 
-Generate a 5,500-7,000 word plan with 7 sections, bracket citations, and structured market research.
+### Step 3: Populate Financial Model (forked subagent)
+Use skill: `ecommerce-financial-model` with the store name as the argument.
 
-### Step 5: Export to DOCX (Optional)
-Use skill: `ecommerce-document-export`
+Reads `{StoreName}_assumptions.json`, writes `{StoreName}_Financial_Model.xlsx` and `{StoreName}_model_outputs.json`.
 
-Convert to styled Word document if Pandoc is available.
+### Step 4: Write Business Plan (forked subagent)
+Use skill: `ecommerce-business-plan` with the store name as the argument.
+
+Runs in an isolated context with a clean context window. Reads `{StoreName}_intake.json`, `{StoreName}_assumptions.json`, and `{StoreName}_model_outputs.json` from disk. Performs market research, writes narrative, verifies citations. Saves `{StoreName}_Business_Plan.md`.
+
+### Step 5: Export to DOCX (forked subagent, optional)
+Use skill: `ecommerce-document-export` with the store name as the argument.
+
+Reads `{StoreName}_Business_Plan.md`, converts to styled Word document. Saves `{StoreName}_Business_Plan.docx`. Skip if Pandoc is not available.
 
 ## Deliverable
 

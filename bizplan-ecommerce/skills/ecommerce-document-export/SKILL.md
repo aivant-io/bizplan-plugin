@@ -5,7 +5,9 @@ description: >
   (.docx) using Pandoc with a custom reference template. Handles heading promotion,
   citation conversion, cover page styling, table of contents, and section page
   breaks. Optional — falls back to markdown delivery if Pandoc is not available.
-compatibility: Pandoc (required for DOCX). python-docx>=1.1.0 (required for cover page styling).
+context: fork
+model: haiku
+allowed-tools: Read, Write, Glob, Grep, Bash
 ---
 
 # Ecommerce Document Export
@@ -14,8 +16,21 @@ compatibility: Pandoc (required for DOCX). python-docx>=1.1.0 (required for cove
 
 This skill converts the markdown business plan (from the ecommerce-business-plan skill) into a professionally styled Word document. It is **optional** — if Pandoc is not installed, deliver the plan as markdown instead.
 
-**Input:** Markdown business plan content + business name
-**Output:** Styled .docx file
+## File Inputs & Outputs
+
+This skill is invoked with the store name as its argument: `$ARGUMENTS`
+
+**Read from the current working directory:**
+- `{StoreName}_Business_Plan.md` — markdown business plan (using the store name from `$ARGUMENTS`)
+
+**Read from the skill directory:**
+- `${CLAUDE_SKILL_DIR}/scripts/export_docx.py` — main export script
+- `${CLAUDE_SKILL_DIR}/scripts/create_reference_doc.py` — template generator
+- `${CLAUDE_SKILL_DIR}/templates/reference.docx` — Pandoc reference template
+- `${CLAUDE_SKILL_DIR}/requirements.txt` — Python dependencies (python-docx)
+
+**Write to the current working directory:**
+- `{StoreName}_Business_Plan.docx` — styled Word document
 
 **Scripts:**
 - [scripts/export_docx.py](scripts/export_docx.py) — Main export script (preprocessing + Pandoc + post-processing)

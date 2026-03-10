@@ -291,7 +291,9 @@ Present questions conversationally, one section at a time. Explain options brief
 
 ## Output Format
 
-After collecting all answers, output the intake as a JSON object matching the schema in `references/intake_schema.jsonc`. Example structure:
+After collecting all answers, output the intake as a JSON object matching the schema in `references/intake_schema.jsonc`. **Save the intake JSON to `{StoreName}_intake.json` in the current working directory**, where `{StoreName}` is the value of `business_profile.store_name` (e.g., `GlowHaus_intake.json`). This file is consumed by downstream skills (assumptions, financial model, business plan) which run in isolated subagent contexts and read their inputs from disk.
+
+Example structure:
 
 ```json
 {

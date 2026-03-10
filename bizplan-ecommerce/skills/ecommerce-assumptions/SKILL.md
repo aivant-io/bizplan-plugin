@@ -8,7 +8,9 @@ description: >
   traffic, CPC, equity needs, and overhead allocation. Use when building ecommerce
   financial models, resolving business plan assumptions, or analyzing ecommerce
   startup financials.
-compatibility: Web search for market research. Python for validation.
+context: fork
+model: sonnet
+allowed-tools: Read, Write, Glob, Grep, Bash
 ---
 
 # Ecommerce Assumptions Resolution
@@ -23,6 +25,20 @@ This skill resolves **49 writable financial model drivers** from a founder's int
 For full driver definitions (types, bounds, semantics), see [references/driver_catalog.jsonc](references/driver_catalog.jsonc).
 For detailed heuristics and category adjustments, see [references/deep_research_policy.md](references/deep_research_policy.md).
 For the rationale behind each mapping table value, see [references/heuristic_rationale.md](references/heuristic_rationale.md).
+
+## File Inputs & Outputs
+
+This skill is invoked with the store name as its argument: `$ARGUMENTS`
+
+**Read from the current working directory:**
+- Intake JSON file, named `{StoreName}_intake.json` (using the store name provided above)
+
+**Read from the skill directory:**
+- `${CLAUDE_SKILL_DIR}/data/us/{category}.json` — curated category benchmarks (category from intake JSON)
+- `${CLAUDE_SKILL_DIR}/references/driver_catalog.jsonc` — driver definitions and bounds
+
+**Write to the current working directory:**
+- `{StoreName}_assumptions.json` — resolved assumptions with all 49 drivers (using the store name above)
 
 ## Resolution Pipeline
 

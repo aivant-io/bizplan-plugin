@@ -6,7 +6,9 @@ description: >
   tracking, narrative writing with bracket citations, and mechanical citation
   verification. Produces a 6,000-7,500 word plan with 7 required sections
   incorporating Excel model outputs and web-researched market context.
-compatibility: Web search for market research.
+context: fork
+model: opus
+allowed-tools: Read, Write, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 
 # Ecommerce Business Plan Writer
@@ -15,12 +17,24 @@ compatibility: Web search for market research.
 
 This skill generates a professional business plan narrative using the founder's intake data, resolved assumptions, and Excel model outputs. The plan is written in first-person plural ("we", "our") and incorporates sourced market data alongside the founder's own projections.
 
-**Inputs:**
-- Intake JSON (from ecommerce-intake skill) — includes `business_profile.target_customer`, `business_profile.differentiation`, `business_profile.founder_background`, and `business_profile.why_now` (all nullable — may be `null` if founder was unsure)
-- Resolved assumptions JSON (from ecommerce-assumptions skill)
-- Model outputs JSON (from ecommerce-financial-model skill)
+## File Inputs & Outputs
 
-**Outputs:** Business plan in markdown format with bracket citations `[1]`, `[2]`, etc.
+This skill is invoked with the store name as its argument: `$ARGUMENTS`
+
+**Read from the current working directory:**
+- `{StoreName}_intake.json` — founder intake data (includes `business_profile.target_customer`, `business_profile.differentiation`, `business_profile.founder_background`, and `business_profile.why_now` — all nullable, may be `null` if founder was unsure)
+- `{StoreName}_assumptions.json` — resolved assumptions with all 49 drivers
+- `{StoreName}_model_outputs.json` — financial model outputs (revenue, margins, cash flow, unit economics)
+
+**Read from the skill directory (curated benchmarks for Stage 1 research):**
+- `${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/data/us/{category}.json` — category benchmarks with source citations
+- `${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/data/global_defaults.json` — inflation rates with sources
+- `${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/data/regional_defaults.json` — regional tax/shipping with sources
+
+**Write to the current working directory:**
+- `{StoreName}_Business_Plan.md` — business plan narrative with bracket citations
+
+(Use the store name from `$ARGUMENTS` above for all `{StoreName}` references.)
 
 ## 3-Stage Pipeline
 

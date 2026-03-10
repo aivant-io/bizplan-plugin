@@ -7,7 +7,9 @@ description: >
   margins, cash flow, unit economics), and validates balance sheet integrity.
   Includes equity optimization loop to ensure positive cash balance. Use after
   the ecommerce-assumptions skill has resolved all driver values.
-compatibility: Python 3.11+ with openpyxl and xlcalculator (see requirements.txt).
+context: fork
+model: sonnet
+allowed-tools: Read, Write, Glob, Grep, Bash
 ---
 
 # Ecommerce Financial Model
@@ -22,6 +24,23 @@ This skill takes resolved assumptions (49 driver values from the ecommerce-assum
 For cell-to-driver mappings, see [references/input_map.jsonc](references/input_map.jsonc).
 For output extraction addresses, see [references/output_map.jsonc](references/output_map.jsonc).
 Template file: [templates/eCommerce_Model_v1.xlsx](templates/eCommerce_Model_v1.xlsx).
+
+## File Inputs & Outputs
+
+This skill is invoked with the store name as its argument: `$ARGUMENTS`
+
+**Read from the current working directory:**
+- Assumptions JSON file, named `{StoreName}_assumptions.json` (using the store name provided above)
+
+**Read from the skill directory:**
+- `${CLAUDE_SKILL_DIR}/references/input_map.jsonc` — driver-to-cell address mappings
+- `${CLAUDE_SKILL_DIR}/references/output_map.jsonc` — output cell addresses for extraction
+- `${CLAUDE_SKILL_DIR}/templates/eCommerce_Model_v1.xlsx` — Excel template (copy, never modify original)
+- `${CLAUDE_SKILL_DIR}/requirements.txt` — Python dependencies
+
+**Write to the current working directory:**
+- `{StoreName}_Financial_Model.xlsx` — populated Excel model
+- `{StoreName}_model_outputs.json` — extracted metrics for the business plan writer
 
 ## Architecture
 

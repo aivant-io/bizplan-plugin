@@ -4,22 +4,24 @@ Generate a 6-year ecommerce financial model without writing the narrative busine
 
 ## Pipeline
 
-Run the first 3 skills only:
+Run the first 3 skills. Step 1 runs inline (user interaction), Steps 2-3 run in isolated subagent contexts reading/writing files from disk.
 
-### Step 1: Intake Questionnaire
+### Step 1: Intake Questionnaire (inline)
 Use skill: `ecommerce-intake`
 
 Walk the founder through the structured questionnaire to collect all inputs.
 
-### Step 2: Resolve Assumptions
-Use skill: `ecommerce-assumptions`
+After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name` — this is passed as the argument to subsequent skills.
 
-Resolve all 49 financial model drivers from the intake JSON.
+### Step 2: Resolve Assumptions (forked subagent)
+Use skill: `ecommerce-assumptions` with the store name as the argument.
 
-### Step 3: Populate Financial Model
-Use skill: `ecommerce-financial-model`
+Reads `{StoreName}_intake.json` from disk, resolves all 49 financial model drivers, writes `{StoreName}_assumptions.json`.
 
-Write values to the Excel template, recalculate formulas, run equity optimization, and extract model outputs.
+### Step 3: Populate Financial Model (forked subagent)
+Use skill: `ecommerce-financial-model` with the store name as the argument.
+
+Reads `{StoreName}_assumptions.json` from disk, populates the Excel template, runs equity optimization, writes `{StoreName}_Financial_Model.xlsx` and `{StoreName}_model_outputs.json`.
 
 **Install dependencies first:**
 ```bash
@@ -38,7 +40,11 @@ pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
 
 ## Output Location
 
-Save to: `{StoreName}_Financial_Model.xlsx`
+Save to the current working directory:
+- `{StoreName}_intake.json`
+- `{StoreName}_assumptions.json`
+- `{StoreName}_Financial_Model.xlsx`
+- `{StoreName}_model_outputs.json`
 
 ## After Generation
 
