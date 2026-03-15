@@ -30,12 +30,16 @@ output/
 *.tmp
 
 # Generated pipeline output files
+*_intake.json
+*_assumptions.json
 *_Financial_Model.xlsx
-*_Business_Plan.docx
+*_model_outputs.json
 *_Business_Plan.md
-*_Model_Outputs.json
-*_model_gen.py
+*_Business_Plan.docx
 ~$*
+
+# pip install artifacts (shell misinterprets >= as file redirect)
+=*
 
 # Environment variables
 .env

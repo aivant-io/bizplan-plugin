@@ -122,14 +122,14 @@ Mechanically verify all citations after writing:
 ## Required Sections (7)
 
 ### 1. Executive Summary
-- Write this LAST (after all other sections)
+- Write this LAST (after all other sections), then **place it first** in the final document — it must appear as section 1, before Business Overview
 - 1-2 pages (400-600 words), standalone summary of the entire plan
 - **Narrative arc** — build this as a story, not a checklist:
   1. **The opportunity**: What problem exists or what shift is happening? (1-2 sentences from `business_profile.why_now` + market research. If `why_now` is null, lead with a market insight from Stage 1 research.)
   2. **The solution**: What are we building and for whom? (From `business_profile.description` + `business_profile.target_customer`)
   3. **The business model**: How do we make money? (AOV, order volume, channel strategy — 2-3 sentences)
   4. **The trajectory**: Where does this go? (From model outputs: `gross_revenue` Year 1 and Year 3, `break_even_year`, `revenue_cagr` — stated as milestones, not a data dump)
-  5. **The ask**: What resources do we need? (Initial funding amount and key use of funds)
+  5. **The ask**: What resources do we need? (Initial funding amount from `initial_equity_injection`, runway from `equity_audit.runway_months` — do not fabricate specific allocations)
 - **Tone**: After reading this section, the founder should think: "Yes, that's exactly what I'm building and why." This is NOT a list of metrics — it is a story with numbers as supporting evidence.
 
 ### 2. Business Overview
@@ -184,7 +184,7 @@ All financial figures in this section must come from the model outputs JSON. Nev
   - **If breakeven is Year 1** (immediately profitable): Lead with the strength — the business model generates positive EBITDA from launch. Explain why: high gross margins, lean overhead, strong unit economics, or favorable CAC-to-LTV ratio. Then pivot to sustainability — what maintains profitability as the business scales (e.g., fixed costs growing slower than revenue, retention reducing acquisition dependency, margin improvements from supplier scale).
   - **If breakeven is Year 2+** (early losses expected): Frame early losses as intentional investment: "We expect to operate at a loss of $X in Year 1 as we invest in [customer acquisition / inventory / team]. We reach EBITDA breakeven in Year N as [specific mechanism — fixed costs spread across more orders, CAC declines with brand recognition, repeat purchases reduce acquisition dependency]."
 - **Gross margin profile** (1 paragraph): Use model outputs: `gross_margin_pct` (Years 1-6). Describe gross margin trajectory and COGS management. Compare to industry benchmarks from Stage 1 research. Explain any expected margin improvement and the mechanism behind it.
-- **Capital requirements and use of funds** (1-2 paragraphs): Use model outputs: `initial_equity_injection` and `initial_loan_amount`. Reference `funding_tax.loan_plan` from intake for loan context. Provide clear allocation: "Of the $X initial investment, approximately $Y is allocated to pre-launch inventory, $Z to first-quarter marketing, and $W held as operating cash buffer." When `equity_audit` is present in model outputs, use its `monthly_burn`, `runway_months`, and iteration data to ground the capital explanation in the actual calculation rather than reconstructing it.
+- **Capital requirements and use of funds** (1-2 paragraphs): Use model outputs: `initial_equity_injection`, `initial_loan_amount`, and `equity_audit` (if present). State the total funding amount and explain what it covers: the gap between Year 1 costs and Year 1 revenue. Use `equity_audit.monthly_burn` and `equity_audit.runway_months` to explain the capital logic: "The $X initial investment provides Y months of runway at a projected monthly burn of $Z." Reference Year 1 expense totals from model outputs (`expenses.total_fixed_costs`, `expenses.marketing_spend`, `expenses.fulfilment_variable`) to show where costs concentrate — but do NOT fabricate specific dollar allocations like "$Y for inventory" or "$Z for marketing" since equity is fungible and revenue also covers costs. If `funding_tax.loan_plan` is `term_loan`, mention the loan amount and terms.
 - **What could go wrong** (2-3 paragraphs): Identify 3-4 material risks and the founder's response for each. Frame as clear-eyed awareness, not pessimism. For each risk: state it, estimate impact, describe mitigation or pivot. Risks to consider:
 - Customer acquisition costs higher than projected (what if CAC is 50% above target?)
 - Slower-than-expected demand (what if Year 1 orders are 30% below target?)
