@@ -8,7 +8,6 @@ description: >
   traffic, CPC, equity needs, and overhead allocation. Use when building ecommerce
   financial models, resolving business plan assumptions, or analyzing ecommerce
   startup financials.
-compatibility: Web search for market research. Python for validation.
 ---
 
 # Ecommerce Assumptions Resolution
@@ -23,6 +22,31 @@ This skill resolves **49 writable financial model drivers** from a founder's int
 For full driver definitions (types, bounds, semantics), see [references/driver_catalog.jsonc](references/driver_catalog.jsonc).
 For detailed heuristics and category adjustments, see [references/deep_research_policy.md](references/deep_research_policy.md).
 For the rationale behind each mapping table value, see [references/heuristic_rationale.md](references/heuristic_rationale.md).
+
+## Script Execution
+
+This skill runs as a Python script — **do not interpret the resolution pipeline manually**. Run:
+
+```bash
+python "${CLAUDE_SKILL_DIR}/scripts/resolve_assumptions.py" "$ARGUMENTS"
+```
+
+Where `$ARGUMENTS` is the store name. The script reads `{StoreName}_intake.json` from the current working directory and writes `{StoreName}_assumptions.json`.
+
+The script reads all benchmark data from the skill's bundled data files (`data/us/{category}.json`, `data/regional_defaults.json`) and validates outputs against `references/driver_catalog.jsonc`.
+
+## File Inputs & Outputs
+
+**Read from the current working directory:**
+- Intake JSON file, named `{StoreName}_intake.json`
+
+**Read from the skill directory (by the script automatically):**
+- `${CLAUDE_SKILL_DIR}/data/us/{category}.json` — curated category benchmarks (category from intake JSON)
+- `${CLAUDE_SKILL_DIR}/data/regional_defaults.json` — regional tax rates, salary multipliers
+- `${CLAUDE_SKILL_DIR}/references/driver_catalog.jsonc` — driver definitions and bounds
+
+**Write to the current working directory:**
+- `{StoreName}_assumptions.json` — resolved assumptions with all 49 drivers
 
 ## Resolution Pipeline
 

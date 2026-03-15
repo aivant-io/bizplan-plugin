@@ -22,15 +22,26 @@ Claude plugin marketplace containing business plan and financial model generator
 ### Scripts
 
 ```bash
+# Resolve intake JSON → 49 financial drivers (Stage 2)
+# Exit codes: 0 = success, 1 = validation warnings, 2 = IO error
+python bizplan-ecommerce/skills/ecommerce-assumptions/scripts/resolve_assumptions.py \
+  <intake.json> <output_assumptions.json>
+
+# Populate Excel template from assumptions JSON (Stage 3)
+python bizplan-ecommerce/skills/ecommerce-financial-model/scripts/populate_model.py \
+  <assumptions.json> <output_model.xlsx> [--template <template.xlsx>]
+
 # Validate a populated model (49 inputs, balance sheet, traffic mix, conversion hierarchy)
 python bizplan-ecommerce/skills/ecommerce-financial-model/scripts/validate_model.py <path_to_model.xlsx>
 
-# Convert markdown business plan to styled DOCX
+# Convert markdown business plan to styled DOCX (Stage 5)
 python bizplan-ecommerce/skills/ecommerce-document-export/scripts/export_docx.py <input.md> <output.docx> --title "StoreName" [--date "March 2026"]
 
 # Regenerate the Pandoc reference.docx template
 python bizplan-ecommerce/skills/ecommerce-document-export/scripts/create_reference_doc.py
 ```
+
+> **Note:** `run_financial_model.py` at the repo root is a dev/test artifact with hardcoded paths — not part of the production pipeline.
 
 ## Plugin Structure
 
@@ -51,26 +62,37 @@ bizplan-{vertical}/
         └── requirements.txt       # Python dependencies
 ```
 
-Output files are named `{StoreName}_Financial_Model.xlsx`, `{StoreName}_Business_Plan.md/.docx`, `{StoreName}_model_outputs.json`.
+Output files are named `{StoreName}_intake.json`, `{StoreName}_assumptions.json`, `{StoreName}_Financial_Model.xlsx`, `{StoreName}_model_outputs.json`, `{StoreName}_Business_Plan.md/.docx`.
 
 ## Pipeline Architecture (Ecommerce)
 
-The ecommerce vertical runs 5 sequential skills, each consuming the prior stage's output:
+The ecommerce vertical runs a **hybrid pipeline**: Steps 2, 3, and 5 execute as Python scripts (fast, deterministic, zero LLM tokens). Step 4 runs in a forked subagent (`context: fork`, Opus) for clean-context narrative writing. Step 1 runs inline for user interaction.
 
-1. **ecommerce-intake** — 22-question founder questionnaire across 8 sections with conditional branching → intake JSON (`intake_schema.jsonc`)
-2. **ecommerce-assumptions** — Resolves all 49 financial drivers using category benchmarks from `data/us/{category}.json`, global/regional defaults, and calculation formulas → assumptions JSON
-3. **ecommerce-financial-model** — Populates Excel template via XML editing, recalculates with xlcalculator, runs equity optimization loop → `.xlsx` + model outputs JSON
-4. **ecommerce-business-plan** — 3-stage writer: market research (curated benchmarks + structured web search across 4 research areas), narrative (5,500-7,000 words, 7 sections), citation verification → markdown
-5. **ecommerce-document-export** — Pandoc conversion with `reference.docx` template → `.docx`
+1. **ecommerce-intake** (inline, user's model) — 26-question founder questionnaire across 8 sections with conditional branching → `{StoreName}_intake.json`
+2. **ecommerce-assumptions** (Python script: `scripts/resolve_assumptions.py`) — Resolves all 49 financial drivers using category benchmarks from `data/us/{category}.json`, global/regional defaults, and calculation formulas → `{StoreName}_assumptions.json`
+3. **ecommerce-financial-model** (Python script: `scripts/populate_model.py`) — Populates Excel template via XML editing, recalculates with xlcalculator, runs equity optimization loop → `{StoreName}_Financial_Model.xlsx` + `{StoreName}_model_outputs.json`
+4. **ecommerce-business-plan** (`context: fork`, `model: opus`, `allowed-tools: Read, Write, Glob, Grep, Bash, WebSearch, WebFetch`) — 3-stage writer: market research (curated benchmarks + structured web search across 4 research areas), narrative (6,000-7,500 words, 7 sections), citation verification → `{StoreName}_Business_Plan.md`
+5. **ecommerce-document-export** (Python script: `scripts/export_docx.py`) — Pandoc conversion with `reference.docx` template → `{StoreName}_Business_Plan.docx`
+
+The plan writer (Step 4) is the only stage using `context: fork` — it benefits from isolation by starting with a clean context window for web research and 7k-word narrative generation. Steps 2, 3, and 5 are deterministic and run in seconds as scripts.
 
 ### Key Schema Files (source of truth — never guess values)
 
 | Schema | Location | Purpose |
 |--------|----------|---------|
 | `intake_schema.jsonc` | `ecommerce-intake/references/` | Questionnaire data structure, enums, validation rules |
+| `intake_questionnaire.md` | `ecommerce-intake/references/` | Full question wording + conditional branching logic |
 | `driver_catalog.jsonc` | `ecommerce-assumptions/references/` | All 49 driver IDs, types, bounds (master reference) |
 | `input_map.jsonc` | `ecommerce-financial-model/references/` | 49 driver → Excel cell address mappings (Assumptions sheet, column B, B5-B79) |
 | `output_map.jsonc` | `ecommerce-financial-model/references/` | Model sheet output addresses (columns E-J for 2026-2031) |
+
+## Debugging
+
+Two skills have `TROUBLESHOOTING.md` files with known issues and fixes:
+- `bizplan-ecommerce/skills/ecommerce-assumptions/TROUBLESHOOTING.md` — 10 common issues (percentage format, traffic mix, conversion hierarchy, equity suggestion)
+- `bizplan-ecommerce/skills/ecommerce-financial-model/TROUBLESHOOTING.md` — 11 critical issues (openpyxl corruption, stale formulas, xlcalculator references, balance sheet)
+
+Consult these before debugging pipeline failures.
 
 ## Critical Technical Rules
 

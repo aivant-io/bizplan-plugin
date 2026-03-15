@@ -4,27 +4,31 @@ Generate a 6-year ecommerce financial model without writing the narrative busine
 
 ## Pipeline
 
-Run the first 3 skills only:
+Run the first 3 steps. Step 1 runs inline (user interaction), Steps 2-3 run as Python scripts (fast, deterministic).
 
-### Step 1: Intake Questionnaire
+### Step 1: Intake Questionnaire (inline)
 Use skill: `ecommerce-intake`
 
 Walk the founder through the structured questionnaire to collect all inputs.
 
-### Step 2: Resolve Assumptions
-Use skill: `ecommerce-assumptions`
+After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name`.
 
-Resolve all 49 financial model drivers from the intake JSON.
+### Step 2: Resolve Assumptions (Python script)
 
-### Step 3: Populate Financial Model
-Use skill: `ecommerce-financial-model`
+```bash
+python "${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/scripts/resolve_assumptions.py" "{StoreName}"
+```
 
-Write values to the Excel template, recalculate formulas, run equity optimization, and extract model outputs.
+Reads `{StoreName}_intake.json`, resolves all 49 financial model drivers, writes `{StoreName}_assumptions.json`.
 
-**Install dependencies first:**
+### Step 3: Populate Financial Model (Python script)
+
 ```bash
 pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
+python "${CLAUDE_SKILL_DIR}/../ecommerce-financial-model/scripts/populate_model.py" "{StoreName}"
 ```
+
+Reads `{StoreName}_assumptions.json`, populates the Excel template, runs equity optimization, writes `{StoreName}_Financial_Model.xlsx` and `{StoreName}_model_outputs.json`.
 
 ## Deliverable
 
@@ -38,7 +42,11 @@ pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
 
 ## Output Location
 
-Save to: `{StoreName}_Financial_Model.xlsx`
+Save to the current working directory:
+- `{StoreName}_intake.json`
+- `{StoreName}_assumptions.json`
+- `{StoreName}_Financial_Model.xlsx`
+- `{StoreName}_model_outputs.json`
 
 ## After Generation
 

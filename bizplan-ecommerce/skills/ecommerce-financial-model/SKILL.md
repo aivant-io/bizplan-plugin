@@ -7,7 +7,6 @@ description: >
   margins, cash flow, unit economics), and validates balance sheet integrity.
   Includes equity optimization loop to ensure positive cash balance. Use after
   the ecommerce-assumptions skill has resolved all driver values.
-compatibility: Python 3.11+ with openpyxl and xlcalculator (see requirements.txt).
 ---
 
 # Ecommerce Financial Model
@@ -22,6 +21,33 @@ This skill takes resolved assumptions (49 driver values from the ecommerce-assum
 For cell-to-driver mappings, see [references/input_map.jsonc](references/input_map.jsonc).
 For output extraction addresses, see [references/output_map.jsonc](references/output_map.jsonc).
 Template file: [templates/eCommerce_Model_v1.xlsx](templates/eCommerce_Model_v1.xlsx).
+
+## Script Execution
+
+This skill runs as a Python script — **do not interpret the population logic manually**. Install dependencies first, then run:
+
+```bash
+pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
+python "${CLAUDE_SKILL_DIR}/scripts/populate_model.py" "$ARGUMENTS"
+```
+
+Where `$ARGUMENTS` is the store name. The script reads `{StoreName}_assumptions.json` from the current working directory and writes `{StoreName}_Financial_Model.xlsx` and `{StoreName}_model_outputs.json`.
+
+The script handles all XML editing, formula recalculation, equity optimization, and output extraction automatically.
+
+## File Inputs & Outputs
+
+**Read from the current working directory:**
+- `{StoreName}_assumptions.json` — resolved assumptions
+
+**Read from the skill directory (by the script automatically):**
+- `${CLAUDE_SKILL_DIR}/references/input_map.jsonc` — driver-to-cell address mappings
+- `${CLAUDE_SKILL_DIR}/references/output_map.jsonc` — output cell addresses for extraction
+- `${CLAUDE_SKILL_DIR}/templates/eCommerce_Model_v1.xlsx` — Excel template (copy, never modify original)
+
+**Write to the current working directory:**
+- `{StoreName}_Financial_Model.xlsx` — populated Excel model
+- `{StoreName}_model_outputs.json` — extracted metrics for the business plan writer
 
 ## Architecture
 
