@@ -5,9 +5,6 @@ description: >
   (.docx) using Pandoc with a custom reference template. Handles heading promotion,
   citation conversion, cover page styling, table of contents, and section page
   breaks. Optional — falls back to markdown delivery if Pandoc is not available.
-context: fork
-model: haiku
-allowed-tools: Read, Write, Glob, Grep, Bash
 ---
 
 # Ecommerce Document Export

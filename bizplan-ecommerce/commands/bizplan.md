@@ -4,41 +4,56 @@ Generate a complete ecommerce business plan and 6-year financial model from scra
 
 ## Pipeline
 
-Run all 5 skills in sequence. Each step depends on the output of the previous step. **Steps 2-5 run in isolated subagent contexts** (`context: fork`) — they read inputs from disk and write outputs to disk. Step 1 runs inline because it requires user interaction.
+Run all 5 skills in sequence. Each step depends on the output of the previous step. **Steps 2, 3, and 5 run as Python scripts** (fast, deterministic, zero LLM tokens). **Step 4 runs in a forked subagent** (`context: fork`, Opus) for clean-context narrative writing.
 
 ### Step 1: Intake Questionnaire (inline)
 Use skill: `ecommerce-intake`
 
-Walk the founder through the structured questionnaire (8 sections, ~22 questions with conditional branching). Collect all inputs and produce the intake JSON.
+Walk the founder through the structured questionnaire (8 sections, ~26 questions with conditional branching). Collect all inputs and produce the intake JSON.
 
-After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name` in the intake output — this store name is passed as the argument to all subsequent skills.
+After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name` in the intake output — this store name is used in all subsequent steps.
 
-### Step 2: Resolve Assumptions (forked subagent)
-Use skill: `ecommerce-assumptions` with the store name as the argument.
+### Step 2: Resolve Assumptions (Python script)
+Run the assumptions resolution script:
 
-This skill runs in an isolated context. It reads `{StoreName}_intake.json` from disk, resolves all 49 financial model drivers using mapping tables, curated benchmarks, and calculation formulas, and writes `{StoreName}_assumptions.json` to disk.
+```bash
+python "${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/scripts/resolve_assumptions.py" "{StoreName}"
+```
 
-### Step 3: Populate Financial Model (forked subagent)
-Use skill: `ecommerce-financial-model` with the store name as the argument.
+This reads `{StoreName}_intake.json`, resolves all 49 financial model drivers using curated benchmarks and mapping tables, and writes `{StoreName}_assumptions.json`. Takes ~2 seconds.
 
-This skill runs in an isolated context. It reads `{StoreName}_assumptions.json` from disk, populates the Excel template via direct XML editing, recalculates formulas with xlcalculator, runs equity optimization if needed, and writes:
+### Step 3: Populate Financial Model (Python script)
+Install dependencies and run the model population script:
+
+```bash
+pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
+python "${CLAUDE_SKILL_DIR}/../ecommerce-financial-model/scripts/populate_model.py" "{StoreName}"
+```
+
+This reads `{StoreName}_assumptions.json`, populates the Excel template via direct XML editing, recalculates formulas, runs equity optimization if needed, and writes:
 - `{StoreName}_Financial_Model.xlsx`
 - `{StoreName}_model_outputs.json`
 
-**Install dependencies first:**
-```bash
-pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
-```
+Takes ~5 seconds.
 
 ### Step 4: Write Business Plan (forked subagent)
 Use skill: `ecommerce-business-plan` with the store name as the argument.
 
 This skill runs in an isolated context with a clean context window — no accumulated conversation history from prior steps. It reads all three JSON files from disk (`{StoreName}_intake.json`, `{StoreName}_assumptions.json`, `{StoreName}_model_outputs.json`), performs structured market research (curated benchmarks + web search), writes the narrative with bracket citations, verifies citations, and saves `{StoreName}_Business_Plan.md`.
 
-### Step 5: Export to DOCX (forked subagent, optional)
-Use skill: `ecommerce-document-export` with the store name as the argument.
+### Step 5: Export to DOCX (Python script, optional)
+Run the DOCX export script:
 
-This skill runs in an isolated context. It reads `{StoreName}_Business_Plan.md`, converts to styled Word document using Pandoc and the reference.docx template, and writes `{StoreName}_Business_Plan.docx`. Skip if Pandoc is not installed — deliver markdown instead.
+```bash
+pip install python-docx>=1.1.0
+python "${CLAUDE_SKILL_DIR}/../ecommerce-document-export/scripts/export_docx.py" \
+  "{StoreName}_Business_Plan.md" \
+  "{StoreName}_Business_Plan.docx" \
+  --title "{StoreName}" \
+  --date "$(date +'%B %Y')"
+```
+
+Skip if Pandoc is not installed — deliver markdown instead.
 
 ## Deliverables
 

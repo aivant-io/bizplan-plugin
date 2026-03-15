@@ -22,13 +22,20 @@ Use skill: `ecommerce-intake`
 
 After this skill completes, **save the intake JSON to `{StoreName}_intake.json`** in the current working directory. Extract the store name from `business_profile.store_name`.
 
-### Step 2: Resolve Assumptions (forked subagent)
-Use skill: `ecommerce-assumptions` with the store name as the argument.
+### Step 2: Resolve Assumptions (Python script)
+
+```bash
+python "${CLAUDE_SKILL_DIR}/../ecommerce-assumptions/scripts/resolve_assumptions.py" "{StoreName}"
+```
 
 Reads `{StoreName}_intake.json`, writes `{StoreName}_assumptions.json`.
 
-### Step 3: Populate Financial Model (forked subagent)
-Use skill: `ecommerce-financial-model` with the store name as the argument.
+### Step 3: Populate Financial Model (Python script)
+
+```bash
+pip install openpyxl>=3.1.2 xlcalculator>=0.5.0
+python "${CLAUDE_SKILL_DIR}/../ecommerce-financial-model/scripts/populate_model.py" "{StoreName}"
+```
 
 Reads `{StoreName}_assumptions.json`, writes `{StoreName}_Financial_Model.xlsx` and `{StoreName}_model_outputs.json`.
 
@@ -37,10 +44,18 @@ Use skill: `ecommerce-business-plan` with the store name as the argument.
 
 Runs in an isolated context with a clean context window. Reads `{StoreName}_intake.json`, `{StoreName}_assumptions.json`, and `{StoreName}_model_outputs.json` from disk. Performs market research, writes narrative, verifies citations. Saves `{StoreName}_Business_Plan.md`.
 
-### Step 5: Export to DOCX (forked subagent, optional)
-Use skill: `ecommerce-document-export` with the store name as the argument.
+### Step 5: Export to DOCX (Python script, optional)
 
-Reads `{StoreName}_Business_Plan.md`, converts to styled Word document. Saves `{StoreName}_Business_Plan.docx`. Skip if Pandoc is not available.
+```bash
+pip install python-docx>=1.1.0
+python "${CLAUDE_SKILL_DIR}/../ecommerce-document-export/scripts/export_docx.py" \
+  "{StoreName}_Business_Plan.md" \
+  "{StoreName}_Business_Plan.docx" \
+  --title "{StoreName}" \
+  --date "$(date +'%B %Y')"
+```
+
+Skip if Pandoc is not available — deliver markdown instead.
 
 ## Deliverable
 
